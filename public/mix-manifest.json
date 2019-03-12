@@ -1,0 +1,10 @@
+{
+    "/login-bundle.js": "/login-bundle.js",
+    "/layouts-bundle.js": "/layouts-bundle.js",
+    "/dashboard-bundle.js": "/dashboard-bundle.js",
+    "/dashboard-index-bundle.js": "/dashboard-index-bundle.js",
+    "/register-bundle.js": "/register-bundle.js",
+    "/forgotPassword-bundle.js": "/forgotPassword-bundle.js",
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css"
+}
