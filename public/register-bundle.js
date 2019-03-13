@@ -87,7 +87,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -99,6 +99,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -172,49 +176,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card o-hidden border-0 shadow-lg my-5" }, [
-    _c("div", { staticClass: "card-body p-0" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", {
-          staticClass: "col-lg-5 d-none d-lg-block bg-register-image"
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-7" }, [
-          _c("div", { staticClass: "p-5" }, [
-            _vm._m(0),
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-xl-10 col-lg-12 col-md-9" }, [
+      _c("div", { staticClass: "card o-hidden border-0 shadow-lg my-5" }, [
+        _c("div", { staticClass: "card-body p-0" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", {
+              staticClass: "col-lg-5 d-none d-lg-block bg-register-image"
+            }),
             _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "text-center" },
-              [
+            _c("div", { staticClass: "col-lg-7" }, [
+              _c("div", { staticClass: "p-5" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
                 _c(
-                  "router-link",
-                  {
-                    staticClass: "small",
-                    attrs: { to: { name: "forgot-password" } }
-                  },
-                  [_vm._v("Forgot Password?")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "text-center" },
-              [
+                  "div",
+                  { staticClass: "text-center" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "small",
+                        attrs: { to: { name: "forgot-password" } }
+                      },
+                      [_vm._v("Forgot Password?")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
                 _c(
-                  "router-link",
-                  { staticClass: "small", attrs: { to: { name: "login" } } },
-                  [_vm._v("Already have an account? Login!")]
+                  "div",
+                  { staticClass: "text-center" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "small",
+                        attrs: { to: { name: "login" } }
+                      },
+                      [_vm._v("Already have an account? Login!")]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            )
+              ])
+            ])
           ])
         ])
       ])

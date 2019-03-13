@@ -9,4 +9,6 @@
 <script>
 </script>
 <style scoped>
+    @import "../../../assets/sass/all.css";
+    @import "../../../assets/sass/sb-admin-login.css";
 </style>

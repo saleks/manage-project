@@ -80,7 +80,6 @@
             submit () {
                 this.login(this.payload)
                     .then(response => {
-                        console.log('login resp', response);
                         if (!response.access_token) {
                             this.setToken(response.access_token)
                         } else {

@@ -9,5 +9,6 @@
 </script>
 
 <style scoped>
-
+    @import "../../../assets/sass/bootstrap.css";
+    @import "../../../assets/sass/sb-admin-dasboard.min.css";
 </style>
