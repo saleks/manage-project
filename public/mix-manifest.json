@@ -1,7 +1,7 @@
 {
-    "/login-bundle.js": "/login-bundle.js",
     "/layouts-bundle.js": "/layouts-bundle.js",
     "/dashboard-bundle.js": "/dashboard-bundle.js",
+    "/login-bundle.js": "/login-bundle.js",
     "/dashboard-index-bundle.js": "/dashboard-index-bundle.js",
     "/register-bundle.js": "/register-bundle.js",
     "/forgotPassword-bundle.js": "/forgotPassword-bundle.js",
