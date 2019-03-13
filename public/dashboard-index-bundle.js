@@ -1,4 +1,4 @@
-webpackJsonp([3],Array(83).concat([
+webpackJsonp([0],Array(83).concat([
 /* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11,7 +11,7 @@ var normalizeComponent = __webpack_require__(19)
 /* script */
 var __vue_script__ = __webpack_require__(135)
 /* template */
-var __vue_template__ = __webpack_require__(136)
+var __vue_template__ = __webpack_require__(171)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -144,13 +144,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Navbar__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Navbar__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Navbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Navbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_WidgetPanel__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_WidgetPanel__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_WidgetPanel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_WidgetPanel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList__);
 //
 //
@@ -255,139 +255,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "wrapper" } },
-    [
-      _c("navbar", {
-        attrs: { programmes: _vm.programmesList },
-        on: { selectedProgramme: _vm.selectedProgramme }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { id: "page-wrapper" } },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-lg-12" },
-              [
-                _vm.selectProgrammProj.length === 0
-                  ? [
-                      _c("h1", { staticClass: "page-header" }, [
-                        _vm._v("Dashboard")
-                      ])
-                    ]
-                  : [
-                      _c("h1", { staticClass: "page-header" }, [
-                        _vm._v(
-                          'Programme: "' + _vm._s(_vm.currentProg.name) + '" '
-                        )
-                      ])
-                    ]
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _vm.selectProgrammProj.length === 0
-            ? [
-                _c(
-                  "div",
-                  { staticClass: "row" },
-                  [
-                    _c("widget-panel", {
-                      attrs: { widget: _vm.widgets.programmes }
-                    }),
-                    _vm._v(" "),
-                    _c("widget-panel", {
-                      attrs: { widget: _vm.widgets.projects }
-                    }),
-                    _vm._v(" "),
-                    _c("widget-panel", {
-                      attrs: { widget: _vm.widgets.tasks }
-                    }),
-                    _vm._v(" "),
-                    _c("widget-panel", {
-                      attrs: { widget: _vm.widgets.comments }
-                    })
-                  ],
-                  1
-                )
-              ]
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-lg-8" },
-              [
-                _vm.selectProgrammProj.length > 0
-                  ? [
-                      _c("project-status-tracker", {
-                        attrs: {
-                          projectList: _vm.selectProgrammProj,
-                          tasksList: _vm.tasksList
-                        },
-                        on: { selectProject: _vm.selectedProject }
-                      })
-                    ]
-                  : [_c("h3", [_vm._v("Select Programme")])]
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-4" },
-              [_c("task-list", { attrs: { tasks: _vm.selectProjectTasks } })],
-              1
-            )
-          ])
-        ],
-        2
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-23b718f2", module.exports)
-  }
-}
-
-/***/ }),
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(146)
+  __webpack_require__(137)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(148)
+var __vue_script__ = __webpack_require__(139)
 /* template */
-var __vue_template__ = __webpack_require__(154)
+var __vue_template__ = __webpack_require__(145)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -426,13 +303,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 146 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(147);
+var content = __webpack_require__(138);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -452,7 +329,7 @@ if(false) {
 }
 
 /***/ }),
-/* 147 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -466,12 +343,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 148 */
+/* 139 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Sidebar__);
 //
 //
@@ -719,19 +596,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 149 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(150)
+  __webpack_require__(141)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(152)
+var __vue_script__ = __webpack_require__(143)
 /* template */
-var __vue_template__ = __webpack_require__(153)
+var __vue_template__ = __webpack_require__(144)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -770,13 +647,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 150 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(151);
+var content = __webpack_require__(142);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -796,7 +673,7 @@ if(false) {
 }
 
 /***/ }),
-/* 151 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -810,7 +687,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 152 */
+/* 143 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -864,7 +741,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 153 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -963,7 +840,7 @@ if (false) {
 }
 
 /***/ }),
-/* 154 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1439,19 +1316,19 @@ if (false) {
 }
 
 /***/ }),
-/* 155 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(156)
+  __webpack_require__(147)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(158)
+var __vue_script__ = __webpack_require__(149)
 /* template */
-var __vue_template__ = __webpack_require__(159)
+var __vue_template__ = __webpack_require__(150)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1490,13 +1367,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 156 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(157);
+var content = __webpack_require__(148);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -1516,7 +1393,7 @@ if(false) {
 }
 
 /***/ }),
-/* 157 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -1530,7 +1407,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 158 */
+/* 149 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1583,7 +1460,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 159 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1640,19 +1517,19 @@ if (false) {
 }
 
 /***/ }),
-/* 160 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(161)
+  __webpack_require__(152)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(163)
+var __vue_script__ = __webpack_require__(154)
 /* template */
-var __vue_template__ = __webpack_require__(164)
+var __vue_template__ = __webpack_require__(160)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1691,13 +1568,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 161 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(162);
+var content = __webpack_require__(153);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -1717,7 +1594,7 @@ if(false) {
 }
 
 /***/ }),
-/* 162 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -1725,18 +1602,18 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 163 */
+/* 154 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectStatusItem__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectStatusItem__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectStatusItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProjectStatusItem__);
 //
 //
@@ -1835,9 +1712,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             filtered = _.filter(this.projectList, ['status', status]);
             newArr = _.map(filtered, function (value) {
                 var tasks = _.filter(_this.tasksList, ['project_id', value.id]);
-                var progSumm = _.reduce(tasks, function (sum, v) {
-                    return sum + v.progress;
-                }, 0);
+                var progSumm = _.sumBy(tasks, function (task) {
+                    return task.progress;
+                });
                 if (_.size(tasks) > 0) {
                     value.progress = _.floor(progSumm / _.size(tasks));
                 } else {
@@ -1845,7 +1722,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 return value;
             });
-            console.log('newArr', newArr);
             return filtered;
         },
         selectProject: function selectProject(id) {
@@ -1855,7 +1731,255 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 164 */
+/* 155 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(156)
+}
+var normalizeComponent = __webpack_require__(19)
+/* script */
+var __vue_script__ = __webpack_require__(158)
+/* template */
+var __vue_template__ = __webpack_require__(159)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2b01ecc4"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/App/Dashboard/Projects/ProjectStatusItem.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2b01ecc4", Component.options)
+  } else {
+    hotAPI.reload("data-v-2b01ecc4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(157);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(18)("66a688fa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b01ecc4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStatusItem.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b01ecc4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStatusItem.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "project-status-item",
+    props: {
+        projects: Array
+    },
+    methods: {
+        selected: function selected(id) {
+            this.$emit('selectEvent', id);
+        },
+        colorClass: function colorClass(progress) {
+            if (progress > 0 && progress <= 30) {
+                return 'progress-bar-success';
+            } else if (progress > 30 && progress <= 70) {
+                return 'progress-bar-warning';
+            } else {
+                return 'progress-bar-danger';
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    { staticClass: "nav nav-tabs nav-stacked" },
+    [
+      _vm._l(_vm.projects, function(project) {
+        return [
+          _c("li", [
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.selected(project.id)
+                  }
+                }
+              },
+              [
+                _c("div", [
+                  _c("p", [
+                    _c("strong", [_vm._v(_vm._s(project.name))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pull-right text-muted" }, [
+                      _vm._v(_vm._s(project.progress) + "% Complete")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "progress progress-striped active" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          class: _vm.colorClass(project.progress),
+                          style: "width: " + project.progress + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": project.progress,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
+                        },
+                        [
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v(
+                              _vm._s(project.progress) + "% Complete (success)"
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "divider" })
+        ]
+      }),
+      _vm._v(" "),
+      _vm.projects.length === 0 ? [_vm._m(0)] : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("p", { staticClass: "text-center" }, [_vm._v("No project")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2b01ecc4", module.exports)
+  }
+}
+
+/***/ }),
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2053,267 +2177,19 @@ if (false) {
 }
 
 /***/ }),
-/* 165 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(166)
+  __webpack_require__(162)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(164)
 /* template */
-var __vue_template__ = __webpack_require__(169)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-2b01ecc4"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/App/Dashboard/Projects/ProjectStatusItem.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2b01ecc4", Component.options)
-  } else {
-    hotAPI.reload("data-v-2b01ecc4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(167);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(18)("66a688fa", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b01ecc4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStatusItem.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b01ecc4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStatusItem.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(17)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 168 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: "project-status-item",
-    props: {
-        projects: Array
-    },
-    methods: {
-        selected: function selected(id) {
-            this.$emit('selectEvent', id);
-        },
-        colorClass: function colorClass(progress) {
-            if (progress > 0 && progress <= 30) {
-                return 'progress-bar-success';
-            } else if (progress > 30 && progress <= 70) {
-                return 'progress-bar-warning';
-            } else {
-                return 'progress-bar-danger';
-            }
-        }
-    }
-});
-
-/***/ }),
-/* 169 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "ul",
-    { staticClass: "nav nav-tabs nav-stacked" },
-    [
-      _vm._l(_vm.projects, function(project) {
-        return [
-          _c("li", [
-            _c(
-              "a",
-              {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    return _vm.selected(project.id)
-                  }
-                }
-              },
-              [
-                _c("div", [
-                  _c("p", [
-                    _c("strong", [_vm._v(_vm._s(project.name))]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "pull-right text-muted" }, [
-                      _vm._v(_vm._s(project.progress) + "% Complete")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "progress progress-striped active" },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar",
-                          class: _vm.colorClass(project.progress),
-                          style: "width: " + project.progress + "%",
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": project.progress,
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v(
-                              _vm._s(project.progress) + "% Complete (success)"
-                            )
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "divider" })
-        ]
-      }),
-      _vm._v(" "),
-      _vm.projects.length === 0 ? [_vm._m(0)] : _vm._e()
-    ],
-    2
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("p", { staticClass: "text-center" }, [_vm._v("No project")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2b01ecc4", module.exports)
-  }
-}
-
-/***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(171)
-}
-var normalizeComponent = __webpack_require__(19)
-/* script */
-var __vue_script__ = __webpack_require__(173)
-/* template */
-var __vue_template__ = __webpack_require__(179)
+var __vue_template__ = __webpack_require__(170)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2352,13 +2228,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 171 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(172);
+var content = __webpack_require__(163);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -2378,7 +2254,7 @@ if(false) {
 }
 
 /***/ }),
-/* 172 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -2392,12 +2268,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 173 */
+/* 164 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TaskItem__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TaskItem__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TaskItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TaskItem__);
 //
 //
@@ -2449,19 +2325,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 174 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(175)
+  __webpack_require__(166)
 }
 var normalizeComponent = __webpack_require__(19)
 /* script */
-var __vue_script__ = __webpack_require__(177)
+var __vue_script__ = __webpack_require__(168)
 /* template */
-var __vue_template__ = __webpack_require__(178)
+var __vue_template__ = __webpack_require__(169)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2500,13 +2376,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(176);
+var content = __webpack_require__(167);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -2526,7 +2402,7 @@ if(false) {
 }
 
 /***/ }),
-/* 176 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(17)(false);
@@ -2540,7 +2416,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 177 */
+/* 168 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2599,7 +2475,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 178 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2684,7 +2560,7 @@ if (false) {
 }
 
 /***/ }),
-/* 179 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2771,6 +2647,121 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-84dced42", module.exports)
+  }
+}
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "wrapper" } },
+    [
+      _c("navbar", {
+        attrs: { programmes: _vm.programmesList },
+        on: { selectedProgramme: _vm.selectedProgramme }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { id: "page-wrapper" } },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-lg-12" },
+              [
+                _vm.selectProgrammProj.length === 0
+                  ? [
+                      _c("h1", { staticClass: "page-header" }, [
+                        _vm._v("Dashboard")
+                      ])
+                    ]
+                  : [
+                      _c("h1", { staticClass: "page-header" }, [
+                        _vm._v(
+                          'Programme: "' + _vm._s(_vm.currentProg.name) + '" '
+                        )
+                      ])
+                    ]
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _vm.selectProgrammProj.length === 0
+            ? [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _c("widget-panel", {
+                      attrs: { widget: _vm.widgets.programmes }
+                    }),
+                    _vm._v(" "),
+                    _c("widget-panel", {
+                      attrs: { widget: _vm.widgets.projects }
+                    }),
+                    _vm._v(" "),
+                    _c("widget-panel", {
+                      attrs: { widget: _vm.widgets.tasks }
+                    }),
+                    _vm._v(" "),
+                    _c("widget-panel", {
+                      attrs: { widget: _vm.widgets.comments }
+                    })
+                  ],
+                  1
+                )
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-lg-8" },
+              [
+                _vm.selectProgrammProj.length > 0
+                  ? [
+                      _c("project-status-tracker", {
+                        attrs: {
+                          projectList: _vm.selectProgrammProj,
+                          tasksList: _vm.tasksList
+                        },
+                        on: { selectProject: _vm.selectedProject }
+                      })
+                    ]
+                  : [_c("h3", [_vm._v("Select Programme")])]
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-4" },
+              [_c("task-list", { attrs: { tasks: _vm.selectProjectTasks } })],
+              1
+            )
+          ])
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-23b718f2", module.exports)
   }
 }
 

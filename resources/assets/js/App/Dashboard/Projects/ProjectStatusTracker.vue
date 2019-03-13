@@ -91,9 +91,7 @@
                 filtered = _.filter(this.projectList, ['status', status]);
                 newArr = _.map(filtered, (value) => {
                     let tasks = _.filter(this.tasksList, ['project_id', value.id]);
-                    let progSumm = _.reduce(tasks, function(sum, v) {
-                        return sum + v.progress;
-                    }, 0);
+                    let progSumm = _.sumBy(tasks, (task) => {return task.progress});
                     if ( _.size(tasks) > 0 ) {
                         value.progress = _.floor((progSumm / _.size(tasks)));
                     } else {
@@ -101,7 +99,6 @@
                     }
                     return value;
                 });
-                console.log('newArr', newArr);
                 return filtered;
             },
             selectProject(id) {
