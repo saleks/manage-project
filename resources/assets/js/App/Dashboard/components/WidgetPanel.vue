@@ -30,7 +30,7 @@
         },
         name: "widget-panel",
         mounted() {
-            console.log('widget', this.widget);
+            // console.log('widget', this.widget);
             // this.widgetInfo = this.widget;
         },
         data () {

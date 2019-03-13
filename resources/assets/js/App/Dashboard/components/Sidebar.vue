@@ -14,16 +14,13 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <router-link :to="{ name: 'home' }"><i class="fa fa-dashboard fa-fw"></i> Dashboard</router-link>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-life-ring fa-fw"></i> Plant Support<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-life-ring fa-fw"></i> Programmes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a href="plantsp.html">Plant Support</a>
-                        </li>
-                        <li>
-                            <a href="plantsp.html">Plant Support By Assigned To</a>
+                        <li v-for="programme in programmes">
+                            <a @click.stop="selected(programme.id)">{{ programme.name }}</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -37,7 +34,16 @@
 
 <script>
     export default {
-        name: "sidebar"
+        name: "sidebar",
+        props: {
+            programmes: Array
+        },
+        methods: {
+            selected(id) {
+                console.log('id', id);
+                this.$emit('selectEvent', id);
+            }
+        }
     }
 </script>
 

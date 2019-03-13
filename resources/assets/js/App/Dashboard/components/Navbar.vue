@@ -222,7 +222,7 @@
         </ul>
         <!-- /.navbar-top-links -->
 
-        <sidebar></sidebar>
+        <sidebar :programmes="programmes" @selectEvent="selected"></sidebar>
     </nav>
 </template>
 
@@ -232,6 +232,14 @@
         name: "navbar",
         components: {
             Sidebar
+        },
+        props: {
+            programmes: Array
+        },
+        methods: {
+            selected(id) {
+                this.$emit('selectedProgramme', id)
+            }
         }
     }
 </script>
