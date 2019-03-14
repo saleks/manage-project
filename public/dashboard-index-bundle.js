@@ -133,7 +133,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -294,7 +294,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.taskFilter(this.currentProject.id);
         },
         isEmpty: function isEmpty(object) {
-            return JSON.stringify(object) == "{}";
+            return JSON.stringify(object) === "{}";
+        },
+        getWidget: function getWidget(name) {
+            this.widgets[name].count = this.count(this[name + 'List']);
+            return this.widgets[name];
+        },
+        count: function count(array) {
+            return _.size(array);
         }
     },
     data: function data() {
@@ -306,15 +313,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             selectProjectTasks: [],
             currentProg: {},
             selectProgrammProj: [],
-            widgets: {
-                programmes: { title: 'Programmes', amount: 3, panelColorType: 'panel-primary', icon: 'fa-life-ring' },
-                projects: { title: 'Projects', amount: 63, panelColorType: 'panel-green', icon: 'fa-product-hunt' },
-                tasks: { title: 'Tasks', amount: 133, panelColorType: 'panel-yellow', icon: 'fa-cogs' },
-                comments: { title: 'Comments', amount: 313, panelColorType: 'panel-red', icon: 'fa-comments' }
-            },
             programmesList: [{ id: 1, name: 'Programme 1' }, { id: 2, name: 'Programme 2' }, { id: 3, name: 'Programme 3' }],
             projectList: [{ id: 1, programme_id: 1, name: 'PS001', status: 'Active' }, { id: 2, programme_id: 1, name: 'PS002', status: 'Active' }, { id: 3, programme_id: 1, name: 'PS003', status: 'Completed' }, { id: 4, programme_id: 1, name: 'PS004', status: 'Active' }, { id: 5, programme_id: 1, name: 'PS005', status: 'Archived' }, { id: 6, programme_id: 2, name: 'PS006', status: 'Active' }, { id: 7, programme_id: 1, name: 'PS007', status: 'Deleted' }, { id: 8, programme_id: 3, name: 'PS008', status: 'Active' }, { id: 9, programme_id: 1, name: 'PS009', status: 'Drafts' }],
-            tasksList: [{ id: 1, project_id: 1, name: 'Sprint 0 - Analysis', progress: 100 }, { id: 2, project_id: 1, name: 'Sprint 0 - Scoping', progress: 80 }, { id: 3, project_id: 1, name: 'Sprint 1 - Development', progress: 70 }, { id: 4, project_id: 1, name: 'Sprint 1 - Showcasing', progress: 50 }, { id: 5, project_id: 2, name: 'Sprint 2 - Analysis2', progress: 30 }, { id: 6, project_id: 2, name: 'Sprint 2 - Scoping2', progress: 35 }, { id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30 }]
+            tasksList: [{ id: 1, project_id: 1, name: 'Sprint 0 - Analysis', progress: 100 }, { id: 2, project_id: 1, name: 'Sprint 0 - Scoping', progress: 80 }, { id: 3, project_id: 1, name: 'Sprint 1 - Development', progress: 70 }, { id: 4, project_id: 1, name: 'Sprint 1 - Showcasing', progress: 50 }, { id: 5, project_id: 2, name: 'Sprint 2 - Analysis2', progress: 30 }, { id: 6, project_id: 2, name: 'Sprint 2 - Scoping2', progress: 35 }, { id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30 }],
+            widgets: {
+                programmes: { title: 'Programmes', count: this.count(this.programmesList), panelColorType: 'panel-primary', icon: 'fa-life-ring' },
+                project: { title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt' },
+                tasks: { title: 'Tasks', count: this.count(), panelColorType: 'panel-yellow', icon: 'fa-cogs' },
+                comments: { title: 'Comments', count: this.count(), panelColorType: 'panel-red', icon: 'fa-comments' }
+            }
         };
     }
 });
@@ -1545,7 +1552,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-xs-9 text-right" }, [
             _c("div", { staticClass: "huge" }, [
-              _vm._v(_vm._s(_vm.widget.amount))
+              _vm._v(_vm._s(_vm.widget.count))
             ]),
             _vm._v(" "),
             _c("div", [_vm._v(_vm._s(_vm.widget.title))])
@@ -2787,13 +2794,15 @@ var render = function() {
           "div",
           { staticClass: "row" },
           [
-            _c("widget-panel", { attrs: { widget: _vm.widgets.programmes } }),
+            _c("widget-panel", {
+              attrs: { widget: _vm.getWidget("programmes") }
+            }),
             _vm._v(" "),
-            _c("widget-panel", { attrs: { widget: _vm.widgets.projects } }),
+            _c("widget-panel", { attrs: { widget: _vm.getWidget("project") } }),
             _vm._v(" "),
-            _c("widget-panel", { attrs: { widget: _vm.widgets.tasks } }),
+            _c("widget-panel", { attrs: { widget: _vm.getWidget("tasks") } }),
             _vm._v(" "),
-            _c("widget-panel", { attrs: { widget: _vm.widgets.comments } })
+            _c("widget-panel", { attrs: { widget: _vm.getWidget("comments") } })
           ],
           1
         ),

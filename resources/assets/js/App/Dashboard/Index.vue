@@ -19,10 +19,10 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <widget-panel :widget="widgets.programmes"></widget-panel>
-                <widget-panel :widget="widgets.projects"></widget-panel>
-                <widget-panel :widget="widgets.tasks"></widget-panel>
-                <widget-panel :widget="widgets.comments"></widget-panel>
+                <widget-panel :widget="getWidget('programmes')"></widget-panel>
+                <widget-panel :widget="getWidget('project')"></widget-panel>
+                <widget-panel :widget="getWidget('tasks')"></widget-panel>
+                <widget-panel :widget="getWidget('comments')"></widget-panel>
             </div>
             <!-- /.row -->
             <div class="row">
@@ -136,7 +136,14 @@
                 this.taskFilter(this.currentProject.id);
             },
             isEmpty(object) {
-                return JSON.stringify(object) == "{}";
+                return JSON.stringify(object) === "{}";
+            },
+            getWidget(name){
+                this.widgets[name].count = this.count(this[name+'List']);
+                return this.widgets[name];
+            },
+            count(array){
+                return _.size(array);
             }
         },
         data () {
@@ -148,12 +155,6 @@
                 selectProjectTasks: [],
                 currentProg: {},
                 selectProgrammProj: [],
-                widgets: {
-                    programmes: {title: 'Programmes', amount: 3, panelColorType: 'panel-primary', icon: 'fa-life-ring'},
-                    projects: {title: 'Projects', amount: 63, panelColorType: 'panel-green', icon: 'fa-product-hunt'},
-                    tasks: {title: 'Tasks', amount: 133, panelColorType: 'panel-yellow', icon: 'fa-cogs'},
-                    comments: {title: 'Comments', amount: 313, panelColorType: 'panel-red', icon: 'fa-comments'},
-                },
                 programmesList: [
                     {id: 1, name: 'Programme 1'},
                     {id: 2, name: 'Programme 2'},
@@ -178,7 +179,13 @@
                     {id: 5, project_id: 2, name: 'Sprint 2 - Analysis2', progress: 30},
                     {id: 6, project_id: 2, name: 'Sprint 2 - Scoping2', progress: 35},
                     {id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30},
-                ]
+                ],
+                widgets: {
+                    programmes: {title: 'Programmes', count: this.count(this.programmesList), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
+                    project: {title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt'},
+                    tasks: {title: 'Tasks', count: this.count(), panelColorType: 'panel-yellow', icon: 'fa-cogs'},
+                    comments: {title: 'Comments', count: this.count(), panelColorType: 'panel-red', icon: 'fa-comments'},
+                },
             }
         }
     }

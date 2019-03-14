@@ -7,7 +7,7 @@
                         <i class="fa fa-5x" :class="widget.icon"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{ widget.amount }}</div>
+                        <div class="huge">{{ widget.count }}</div>
                         <div>{{ widget.title }}</div>
                     </div>
                 </div>
