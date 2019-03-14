@@ -3,35 +3,31 @@
         <!-- Navigation -->
         <navbar :programmes="programmesList" @selectedProgramme="selectedProgramme"></navbar>
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="page-header row">
+                <div class="col-lg-6">
                     <template v-if="selectProgrammProj.length === 0">
-                        <h1 class="page-header">Dashboard</h1>
+                        <h1>Dashboard</h1>
                     </template>
                     <template v-else>
-                        <h1 class="page-header">Programme: "{{ currentProg.name }}" </h1>
+                        <h1>Programme: "{{ currentProg.name }}" </h1>
                     </template>
+                </div>
+                <div class="col-lg-6" style="margin:20px 0 0 0">
+                    <button type="button" class="btn btn-info pull-right btn-lg" @click="showModal = true">Start New Programme</button>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <template v-if="selectProgrammProj.length === 0">
-                <div class="row">
-                    <widget-panel :widget="widgets.programmes"></widget-panel>
-                    <widget-panel :widget="widgets.projects"></widget-panel>
-                    <widget-panel :widget="widgets.tasks"></widget-panel>
-                    <widget-panel :widget="widgets.comments"></widget-panel>
-                </div>
-            </template>
+            <div class="row">
+                <widget-panel :widget="widgets.programmes"></widget-panel>
+                <widget-panel :widget="widgets.projects"></widget-panel>
+                <widget-panel :widget="widgets.tasks"></widget-panel>
+                <widget-panel :widget="widgets.comments"></widget-panel>
+            </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
-                    <template v-if="selectProgrammProj.length > 0">
-                        <project-status-tracker :projectList="selectProgrammProj" :tasksList="tasksList" @selectProject="selectedProject"></project-status-tracker>
-                    </template>
-                    <template v-else>
-                        <h3>Select Programme</h3>
-                    </template>
+                    <project-status-tracker :projectList="selectProgrammProj" :tasksList="tasksList" @selectProject="selectedProject"></project-status-tracker>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
@@ -44,6 +40,7 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
+        <add-programme-modal v-if="showModal" @close="showModal = false" @saveProgramme="addProgramme"></add-programme-modal>
     </div>
     <!-- /#wrapper -->
 </template>
@@ -53,6 +50,7 @@
     import WidgetPanel from  './components/WidgetPanel';
     import ProjectStatusTracker from './Projects/ProjectStatusTracker';
     import TaskList from './Tasks/TaskList';
+    import AddProgrammeModal from './Programs/AddProgrammeModal';
 
     export default {
         name: "index",
@@ -60,7 +58,8 @@
             Navbar,
             WidgetPanel,
             ProjectStatusTracker,
-            TaskList
+            TaskList,
+            AddProgrammeModal
         },
         methods: {
             selectedProgramme(id) {
@@ -76,10 +75,19 @@
             },
             taskFilter(id) {
                 this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+            },
+            addProgramme(programme) {
+                let maxId = this.programmesList.reduce(function(prev, curr) {
+                    return prev.id > curr.id ? prev.id : curr.id;
+                });
+                programme.id = ++maxId;
+                this.programmesList.push(programme);
+                this.showModal = false;
             }
         },
         data () {
             return {
+                showModal: false,
                 currentProject: {},
                 selectProjectTasks: [],
                 currentProg: {},
