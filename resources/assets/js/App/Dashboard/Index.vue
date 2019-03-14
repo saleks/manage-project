@@ -131,6 +131,8 @@
                 task.id = ++maxId;
                 task.project_id = this.currentProject.id;
                 task.progress = Math.floor(task.progress);
+                task.start_date = moment(task.start_date).format('YYYY-MM-DD');
+                task.end_date = moment(task.end_date).format('YYYY-MM-DD');
                 this.tasksList.push(task);
                 this.showModalTask = false;
                 this.taskFilter(this.currentProject.id);
@@ -179,6 +181,14 @@
                     {id: 5, project_id: 2, name: 'Sprint 2 - Analysis2', progress: 30},
                     {id: 6, project_id: 2, name: 'Sprint 2 - Scoping2', progress: 35},
                     {id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30},
+                ],
+                commentsList: [
+                    {id: 1, task_id: 1, body: 'Comment text1', user: 'John Doe'},
+                    {id: 2, task_id: 1, body: 'Comment text2', user: 'John Doe'},
+                    {id: 3, task_id: 1, body: 'Comment text3', user: 'John Doe'},
+                    {id: 4, task_id: 1, body: 'Comment text4', user: 'John Doe'},
+                    {id: 5, task_id: 2, body: 'Comment text5', user: 'John Doe'},
+                    {id: 6, task_id: 2, body: 'Comment text6', user: 'John Doe'},
                 ],
                 widgets: {
                     programmes: {title: 'Programmes', count: this.count(this.programmesList), panelColorType: 'panel-primary', icon: 'fa-life-ring'},

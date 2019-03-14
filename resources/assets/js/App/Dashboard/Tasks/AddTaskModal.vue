@@ -6,10 +6,26 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" @click="$emit('close')">&times;</button>
                             <h4 class="modal-title">New Task</h4>
                         </div>
                         <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Start Date</label>
+                                    <datepicker
+                                        :format="format"
+                                        input-class="form-control"
+                                        v-model="task.start_date"></datepicker>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>End Date</label>
+                                    <datepicker
+                                        :format="format"
+                                        input-class="form-control"
+                                        v-model="task.end_date"></datepicker>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Task name:</label>
@@ -44,17 +60,25 @@
 </template>
 
 <script>
+    import Datepicker from 'vuejs-datepicker';
+
     export default {
         name: "add-task-modal",
+        components: {
+            Datepicker
+        },
+        methods: {
+        },
         data() {
             return {
+                format: 'dd-MM-yyyy',
                 task: {
                     id: null,
                     project_id: null,
                     name: '',
                     description: '',
-                    start_date: '',
-                    end_date: '',
+                    start_date: new Date(),
+                    end_date: new Date(),
                     progress: null
                 }
             }
@@ -125,5 +149,9 @@
     .modal-leave-active .modal-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+    }
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #fff;
+        opacity: 1;
     }
 </style>
