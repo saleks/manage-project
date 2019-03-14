@@ -2,27 +2,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-percent fa-fw"></i> &#160;Project Status Tracker
-            <!--<div class="pull-right">-->
-                <!--<div class="btn-group">-->
-                    <!--<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">-->
-                        <!--Plant Support &#160;-->
-                        <!--<span class="caret"></span>-->
-                    <!--</button>-->
-                    <!--<ul class="dropdown-menu pull-right" role="menu">-->
-                        <!--<li><a href="#">Plant Support</a>-->
-                        <!--</li><li class="divider"></li>-->
-                        <!--<li><a href="#">Product Performance</a>-->
-                        <!--</li><li class="divider"></li>-->
-                        <!--<li><a href="#">Engineering</a>-->
-                        <!--</li> <li class="divider"></li>-->
-                        <!--<li><a href="#">OPs/QA</a>-->
-                        <!--</li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--<li><a href="#">Raw Materials</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="pull-right">
+                <button class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
+            </div>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -73,12 +55,13 @@
     import ProjectStatusItem from './ProjectStatusItem'
     export default {
         components: {
-            ProjectStatusItem
+            ProjectStatusItem,
         },
         name: "project-status-tracker",
         props: {
             projectList: Array,
-            tasksList: Array
+            tasksList: Array,
+            showModalProject: Boolean,
         },
         data() {
             return {

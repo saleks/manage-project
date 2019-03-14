@@ -133,7 +133,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -154,6 +154,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal__);
 //
 //
 //
@@ -201,6 +203,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -215,7 +224,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         WidgetPanel: __WEBPACK_IMPORTED_MODULE_1__components_WidgetPanel___default.a,
         ProjectStatusTracker: __WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker___default.a,
         TaskList: __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList___default.a,
-        AddProgrammeModal: __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default.a
+        AddProgrammeModal: __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default.a,
+        AddProjectModal: __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default.a
+    },
+    computed: {
+        computedProject: function computedProject() {}
     },
     methods: {
         selectedProgramme: function selectedProgramme(id) {
@@ -238,12 +251,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             programme.id = ++maxId;
             this.programmesList.push(programme);
-            this.showModal = false;
+            this.showModalProgramme = false;
+        },
+        showedModalProject: function showedModalProject() {
+            if (this.isEmpty(this.currentProg)) {
+                return;
+            }
+            this.showModalProject = true;
+        },
+        addProject: function addProject(project) {
+            var maxId = this.projectList.reduce(function (prev, curr) {
+                return prev.id > curr.id ? prev.id : curr.id;
+            });
+            project.id = ++maxId;
+            project.programme_id = this.currentProg.id;
+            this.projectList.push(project);
+            this.showModalProject = false;
+            this.projectFilter(this.currentProg.id);
+        },
+        isEmpty: function isEmpty(object) {
+            return JSON.stringify(object) == "{}";
         }
     },
     data: function data() {
         return {
-            showModal: false,
+            showModalProject: false,
+            showModalProgramme: false,
             currentProject: {},
             selectProjectTasks: [],
             currentProg: {},
@@ -1612,7 +1645,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1678,24 +1711,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1705,7 +1720,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "project-status-tracker",
     props: {
         projectList: Array,
-        tasksList: Array
+        tasksList: Array,
+        showModalProject: Boolean
     },
     data: function data() {
         return {
@@ -1997,7 +2013,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "panel-heading" }, [
+      _c("i", { staticClass: "fa fa-percent fa-fw" }),
+      _vm._v("  Project Status Tracker\n        "),
+      _c("div", { staticClass: "pull-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-xs",
+            on: {
+              click: function($event) {
+                return _vm.$emit("showedModalProject")
+              }
+            }
+          },
+          [_vm._v("Add New Project")]
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [
       _c("ul", { staticClass: "nav nav-tabs" }, [
@@ -2166,17 +2199,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("i", { staticClass: "fa fa-percent fa-fw" }),
-      _vm._v("  Project Status Tracker\n        ")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -2707,7 +2730,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      _vm.showModal = true
+                      _vm.showModalProgramme = true
                     }
                   }
                 },
@@ -2742,7 +2765,10 @@ var render = function() {
                   projectList: _vm.selectProgrammProj,
                   tasksList: _vm.tasksList
                 },
-                on: { selectProject: _vm.selectedProject }
+                on: {
+                  showedModalProject: _vm.showedModalProject,
+                  selectProject: _vm.selectedProject
+                }
               })
             ],
             1
@@ -2757,13 +2783,24 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.showModal
+      _vm.showModalProgramme
         ? _c("add-programme-modal", {
             on: {
               close: function($event) {
-                _vm.showModal = false
+                _vm.showModalProgramme = false
               },
               saveProgramme: _vm.addProgramme
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showModalProject
+        ? _c("add-project-modal", {
+            on: {
+              close: function($event) {
+                _vm.showModalProject = false
+              },
+              saveProject: _vm.addProject
             }
           })
         : _vm._e()
@@ -3029,6 +3066,318 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-50a82ccd", module.exports)
+  }
+}
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(186)
+}
+var normalizeComponent = __webpack_require__(19)
+/* script */
+var __vue_script__ = __webpack_require__(188)
+/* template */
+var __vue_template__ = __webpack_require__(189)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-18debcfb"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/App/Dashboard/Projects/AddProjectModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18debcfb", Component.options)
+  } else {
+    hotAPI.reload("data-v-18debcfb", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(187);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(18)("558ea81e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18debcfb\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddProjectModal.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18debcfb\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddProjectModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-mask[data-v-18debcfb] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    -webkit-transition: opacity .3s ease;\n    transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-18debcfb] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container[data-v-18debcfb] {\n    width: 300px;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n            box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    -webkit-transition: all .3s ease;\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-18debcfb] {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body[data-v-18debcfb] {\n    margin: 20px 0;\n}\n.modal-default-button[data-v-18debcfb] {\n    float: right;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter[data-v-18debcfb] {\n    opacity: 0;\n}\n.modal-leave-active[data-v-18debcfb] {\n    opacity: 0;\n}\n.modal-enter .modal-container[data-v-18debcfb],\n.modal-leave-active .modal-container[data-v-18debcfb] {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 188 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "add-project-modal",
+    data: function data() {
+        return {
+            project: {
+                id: null,
+                programme_id: null,
+                name: '',
+                status: 'Active'
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "modal" } }, [
+    _c("div", { staticClass: "modal-mask" }, [
+      _c("div", { staticClass: "modal-wrapper" }, [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("h4", { staticClass: "modal-title" }, [_vm._v("New Project")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Project name:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.project.name,
+                        expression: "project.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Programme name" },
+                    domProps: { value: _vm.project.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.project, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Status:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.project.status,
+                        expression: "project.status"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.project,
+                          "status",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "Active" } }, [
+                      _vm._v("Active")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Completed" } }, [
+                      _vm._v("Completed")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Archived" } }, [
+                      _vm._v("Archived")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Deleted" } }, [
+                      _vm._v("Deleted")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Drafts" } }, [
+                      _vm._v("Drafts")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("saveProject", _vm.project)
+                      }
+                    }
+                  },
+                  [_vm._v("Create")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("close")
+                      }
+                    }
+                  },
+                  [_vm._v("Close")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-18debcfb", module.exports)
   }
 }
 

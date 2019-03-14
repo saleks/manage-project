@@ -13,7 +13,7 @@
                     </template>
                 </div>
                 <div class="col-lg-6" style="margin:20px 0 0 0">
-                    <button type="button" class="btn btn-info pull-right btn-lg" @click="showModal = true">Start New Programme</button>
+                    <button type="button" class="btn btn-info pull-right btn-lg" @click="showModalProgramme = true">Start New Programme</button>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -27,7 +27,12 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
-                    <project-status-tracker :projectList="selectProgrammProj" :tasksList="tasksList" @selectProject="selectedProject"></project-status-tracker>
+                    <project-status-tracker
+                        :projectList="selectProgrammProj"
+                        :tasksList="tasksList"
+                        @showedModalProject="showedModalProject"
+                        @selectProject="selectedProject">
+                    </project-status-tracker>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
@@ -40,7 +45,8 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-        <add-programme-modal v-if="showModal" @close="showModal = false" @saveProgramme="addProgramme"></add-programme-modal>
+        <add-programme-modal v-if="showModalProgramme" @close="showModalProgramme = false" @saveProgramme="addProgramme"></add-programme-modal>
+        <add-project-modal v-if="showModalProject" @close="showModalProject = false" @saveProject="addProject"></add-project-modal>
     </div>
     <!-- /#wrapper -->
 </template>
@@ -51,6 +57,7 @@
     import ProjectStatusTracker from './Projects/ProjectStatusTracker';
     import TaskList from './Tasks/TaskList';
     import AddProgrammeModal from './Programs/AddProgrammeModal';
+    import AddProjectModal from './Projects/AddProjectModal';
 
     export default {
         name: "index",
@@ -59,7 +66,13 @@
             WidgetPanel,
             ProjectStatusTracker,
             TaskList,
-            AddProgrammeModal
+            AddProgrammeModal,
+            AddProjectModal
+        },
+        computed: {
+            computedProject: () => {
+
+            }
         },
         methods: {
             selectedProgramme(id) {
@@ -82,12 +95,32 @@
                 });
                 programme.id = ++maxId;
                 this.programmesList.push(programme);
-                this.showModal = false;
+                this.showModalProgramme = false;
+            },
+            showedModalProject() {
+                if (this.isEmpty(this.currentProg)) {
+                    return;
+                }
+                this.showModalProject = true;
+            },
+            addProject(project) {
+                let maxId = this.projectList.reduce(function(prev, curr) {
+                    return prev.id > curr.id ? prev.id : curr.id;
+                });
+                project.id = ++maxId;
+                project.programme_id = this.currentProg.id;
+                this.projectList.push(project);
+                this.showModalProject = false;
+                this.projectFilter(this.currentProg.id);
+            },
+            isEmpty(object) {
+                return JSON.stringify(object) == "{}";
             }
         },
         data () {
             return {
-                showModal: false,
+                showModalProject: false,
+                showModalProgramme: false,
                 currentProject: {},
                 selectProjectTasks: [],
                 currentProg: {},
