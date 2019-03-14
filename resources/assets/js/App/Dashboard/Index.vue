@@ -37,7 +37,9 @@
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
-                    <task-list :tasks="selectProjectTasks"></task-list>
+                    <task-list :tasks="selectProjectTasks"
+                               @showedModalTask="showedModalTask">
+                    </task-list>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-4 -->
@@ -47,6 +49,7 @@
         <!-- /#page-wrapper -->
         <add-programme-modal v-if="showModalProgramme" @close="showModalProgramme = false" @saveProgramme="addProgramme"></add-programme-modal>
         <add-project-modal v-if="showModalProject" @close="showModalProject = false" @saveProject="addProject"></add-project-modal>
+        <add-task-modal v-if="showModalTask" @close="showModalTask = false" @saveTask="addTask"></add-task-modal>
     </div>
     <!-- /#wrapper -->
 </template>
@@ -58,6 +61,7 @@
     import TaskList from './Tasks/TaskList';
     import AddProgrammeModal from './Programs/AddProgrammeModal';
     import AddProjectModal from './Projects/AddProjectModal';
+    import  AddTaskModal from './Tasks/AddTaskModal';
 
     export default {
         name: "index",
@@ -67,7 +71,8 @@
             ProjectStatusTracker,
             TaskList,
             AddProgrammeModal,
-            AddProjectModal
+            AddProjectModal,
+            AddTaskModal
         },
         computed: {
             computedProject: () => {
@@ -113,12 +118,30 @@
                 this.showModalProject = false;
                 this.projectFilter(this.currentProg.id);
             },
+            showedModalTask() {
+                if (this.isEmpty(this.currentProject)) {
+                    return;
+                }
+                this.showModalTask = true;
+            },
+            addTask(task) {
+                let maxId = this.tasksList.reduce(function(prev, curr) {
+                    return prev.id > curr.id ? prev.id : curr.id;
+                });
+                task.id = ++maxId;
+                task.project_id = this.currentProject.id;
+                task.progress = Math.floor(task.progress);
+                this.tasksList.push(task);
+                this.showModalTask = false;
+                this.taskFilter(this.currentProject.id);
+            },
             isEmpty(object) {
                 return JSON.stringify(object) == "{}";
             }
         },
         data () {
             return {
+                showModalTask: false,
                 showModalProject: false,
                 showModalProgramme: false,
                 currentProject: {},

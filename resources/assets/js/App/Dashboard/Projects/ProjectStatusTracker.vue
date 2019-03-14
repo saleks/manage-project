@@ -82,7 +82,7 @@
                     }
                     return value;
                 });
-                return filtered;
+                return newArr;
             },
             selectProject(id) {
                 this.$emit('selectProject', id);

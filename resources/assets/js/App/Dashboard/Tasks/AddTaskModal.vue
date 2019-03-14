@@ -7,27 +7,31 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">New Project</h4>
+                            <h4 class="modal-title">New Task</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label>Project name:</label>
-                                    <input v-model="project.name" type="text" class="form-control" placeholder="Project name">
+                                    <label>Task name:</label>
+                                    <input v-model="task.name" type="text" class="form-control" placeholder="Task name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Status:</label>
-                                <select v-model="project.status" class="form-control">
-                                    <option value="Active">Active</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Archived">Archived</option>
-                                    <option value="Deleted">Deleted</option>
-                                    <option value="Drafts">Drafts</option>
+                                <label>Description:</label>
+                                <textarea v-model="task.description" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Progress:</label>
+                                <select v-model="task.progress" class="form-control">
+                                    <option value="20">20%</option>
+                                    <option value="40">40%</option>
+                                    <option value="60">60%</option>
+                                    <option value="80">80%</option>
+                                    <option value="100">100%</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="$emit('saveProject', project)">Create</button>
+                                <button type="button" class="btn btn-primary" @click="$emit('saveTask', task)">Create</button>
                                 <button class="btn btn-default" @click="$emit('close')">Close</button>
                             </div>
                         </div>
@@ -41,14 +45,17 @@
 
 <script>
     export default {
-        name: "add-project-modal",
+        name: "add-task-modal",
         data() {
             return {
-                project: {
+                task: {
                     id: null,
-                    programme_id: null,
+                    project_id: null,
                     name: '',
-                    status: 'Active'
+                    description: '',
+                    start_date: '',
+                    end_date: '',
+                    progress: null
                 }
             }
         }

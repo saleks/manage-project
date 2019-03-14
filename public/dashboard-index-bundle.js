@@ -133,7 +133,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -156,6 +156,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal__);
 //
 //
 //
@@ -209,6 +211,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -225,7 +231,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ProjectStatusTracker: __WEBPACK_IMPORTED_MODULE_2__Projects_ProjectStatusTracker___default.a,
         TaskList: __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList___default.a,
         AddProgrammeModal: __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default.a,
-        AddProjectModal: __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default.a
+        AddProjectModal: __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default.a,
+        AddTaskModal: __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal___default.a
     },
     computed: {
         computedProject: function computedProject() {}
@@ -269,12 +276,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.showModalProject = false;
             this.projectFilter(this.currentProg.id);
         },
+        showedModalTask: function showedModalTask() {
+            if (this.isEmpty(this.currentProject)) {
+                return;
+            }
+            this.showModalTask = true;
+        },
+        addTask: function addTask(task) {
+            var maxId = this.tasksList.reduce(function (prev, curr) {
+                return prev.id > curr.id ? prev.id : curr.id;
+            });
+            task.id = ++maxId;
+            task.project_id = this.currentProject.id;
+            task.progress = Math.floor(task.progress);
+            this.tasksList.push(task);
+            this.showModalTask = false;
+            this.taskFilter(this.currentProject.id);
+        },
         isEmpty: function isEmpty(object) {
             return JSON.stringify(object) == "{}";
         }
     },
     data: function data() {
         return {
+            showModalTask: false,
             showModalProject: false,
             showModalProgramme: false,
             currentProject: {},
@@ -1748,7 +1773,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 return value;
             });
-            return filtered;
+            return newArr;
         },
         selectProject: function selectProject(id) {
             this.$emit('selectProject', id);
@@ -1842,7 +1867,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1893,8 +1918,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         projects: Array
     },
+    data: function data() {
+        return {
+            sel: null
+        };
+    },
+
     methods: {
         selected: function selected(id) {
+            this.sel = id;
             this.$emit('selectEvent', id);
         },
         colorClass: function colorClass(progress) {
@@ -1921,9 +1953,9 @@ var render = function() {
     "ul",
     { staticClass: "nav nav-tabs nav-stacked" },
     [
-      _vm._l(_vm.projects, function(project) {
+      _vm._l(_vm.projects, function(project, index) {
         return [
-          _c("li", [
+          _c("li", { class: { "bg-info": _vm.sel === project.id } }, [
             _c(
               "a",
               {
@@ -2295,7 +2327,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2308,6 +2340,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TaskItem__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TaskItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TaskItem__);
+//
 //
 //
 //
@@ -2601,7 +2634,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "panel-heading" }, [
+      _c("i", { staticClass: "fa fa-bell fa-fw" }),
+      _vm._v("  Tasks\n        "),
+      _c("div", { staticClass: "pull-right" }, [
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-xs",
+              on: {
+                click: function($event) {
+                  return _vm.$emit("showedModalTask")
+                }
+              }
+            },
+            [_vm._v("Add New Task")]
+          ),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [
       _c(
@@ -2618,60 +2674,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("i", { staticClass: "fa fa-bell fa-fw" }),
-      _vm._v("  Tasks\n        "),
-      _c("div", { staticClass: "pull-right" }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-default btn-xs dropdown-toggle",
-              attrs: { type: "button", "data-toggle": "dropdown" }
-            },
-            [
-              _vm._v("\n                    PS001  \n                    "),
-              _c("span", { staticClass: "caret" })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "dropdown-menu pull-right",
-              attrs: { role: "menu" }
-            },
-            [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Plant Support")])
-              ]),
-              _c("li", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("Product Performance")
-                ])
-              ]),
-              _c("li", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Engineering")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("OPs/QA")])]),
-              _vm._v(" "),
-              _c("li", { staticClass: "divider" }),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Raw Materials")])
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-xs dropdown-toggle",
+        attrs: { type: "button", "data-toggle": "dropdown" }
+      },
+      [
+        _vm._v("\n                    PS001  \n                    "),
+        _c("span", { staticClass: "caret" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "dropdown-menu pull-right", attrs: { role: "menu" } },
+      [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Plant Support")])
+        ]),
+        _c("li", { staticClass: "divider" }),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Product Performance")])
+        ]),
+        _c("li", { staticClass: "divider" }),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Engineering")])]),
+        _vm._v(" "),
+        _c("li", { staticClass: "divider" }),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("OPs/QA")])]),
+        _vm._v(" "),
+        _c("li", { staticClass: "divider" }),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Raw Materials")])])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -2777,7 +2820,12 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-lg-4" },
-            [_c("task-list", { attrs: { tasks: _vm.selectProjectTasks } })],
+            [
+              _c("task-list", {
+                attrs: { tasks: _vm.selectProjectTasks },
+                on: { showedModalTask: _vm.showedModalTask }
+              })
+            ],
             1
           )
         ])
@@ -2801,6 +2849,17 @@ var render = function() {
                 _vm.showModalProject = false
               },
               saveProject: _vm.addProject
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showModalTask
+        ? _c("add-task-modal", {
+            on: {
+              close: function($event) {
+                _vm.showModalTask = false
+              },
+              saveTask: _vm.addTask
             }
           })
         : _vm._e()
@@ -3263,7 +3322,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Programme name" },
+                    attrs: { type: "text", placeholder: "Project name" },
                     domProps: { value: _vm.project.name },
                     on: {
                       input: function($event) {
@@ -3378,6 +3437,341 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-18debcfb", module.exports)
+  }
+}
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(191)
+}
+var normalizeComponent = __webpack_require__(19)
+/* script */
+var __vue_script__ = __webpack_require__(193)
+/* template */
+var __vue_template__ = __webpack_require__(194)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-fa103bba"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/App/Dashboard/Tasks/AddTaskModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fa103bba", Component.options)
+  } else {
+    hotAPI.reload("data-v-fa103bba", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(192);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(18)("f82cef62", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fa103bba\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddTaskModal.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fa103bba\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddTaskModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(17)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-mask[data-v-fa103bba] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    -webkit-transition: opacity .3s ease;\n    transition: opacity .3s ease;\n}\n.modal-wrapper[data-v-fa103bba] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container[data-v-fa103bba] {\n    width: 300px;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n            box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    -webkit-transition: all .3s ease;\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3[data-v-fa103bba] {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body[data-v-fa103bba] {\n    margin: 20px 0;\n}\n.modal-default-button[data-v-fa103bba] {\n    float: right;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter[data-v-fa103bba] {\n    opacity: 0;\n}\n.modal-leave-active[data-v-fa103bba] {\n    opacity: 0;\n}\n.modal-enter .modal-container[data-v-fa103bba],\n.modal-leave-active .modal-container[data-v-fa103bba] {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "add-task-modal",
+    data: function data() {
+        return {
+            task: {
+                id: null,
+                project_id: null,
+                name: '',
+                description: '',
+                start_date: '',
+                end_date: '',
+                progress: null
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "modal" } }, [
+    _c("div", { staticClass: "modal-mask" }, [
+      _c("div", { staticClass: "modal-wrapper" }, [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("h4", { staticClass: "modal-title" }, [_vm._v("New Task")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Task name:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.task.name,
+                        expression: "task.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Task name" },
+                    domProps: { value: _vm.task.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.task, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Description:")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.task.description,
+                      expression: "task.description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { rows: "3" },
+                  domProps: { value: _vm.task.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.task, "description", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Progress:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.task.progress,
+                        expression: "task.progress"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.task,
+                          "progress",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "20" } }, [_vm._v("20%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "40" } }, [_vm._v("40%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "60" } }, [_vm._v("60%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "80" } }, [_vm._v("80%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "100" } }, [_vm._v("100%")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("saveTask", _vm.task)
+                      }
+                    }
+                  },
+                  [_vm._v("Create")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("close")
+                      }
+                    }
+                  },
+                  [_vm._v("Close")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-fa103bba", module.exports)
   }
 }
 

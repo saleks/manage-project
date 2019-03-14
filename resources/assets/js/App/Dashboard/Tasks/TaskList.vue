@@ -4,6 +4,7 @@
             <i class="fa fa-bell fa-fw"></i> &#160;Tasks
             <div class="pull-right">
                 <div class="btn-group">
+                    <button class="btn btn-primary btn-xs" @click="$emit('showedModalTask')">Add New Task</button>
                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                         PS001 &#160;
                         <span class="caret"></span>
