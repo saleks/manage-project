@@ -5,12 +5,7 @@
         <div id="page-wrapper">
             <div class="page-header row">
                 <div class="col-lg-6">
-                    <template v-if="selectProgrammProj.length === 0">
                         <h1>Dashboard</h1>
-                    </template>
-                    <template v-else>
-                        <h1>Programme: "{{ currentProg.name }}" </h1>
-                    </template>
                 </div>
                 <div class="col-lg-6" style="margin:20px 0 0 0">
                     <button type="button" class="btn btn-info pull-right btn-lg" @click="showModalProgramme = true">Start New Programme</button>
@@ -74,10 +69,9 @@
             AddProjectModal,
             AddTaskModal
         },
-        computed: {
-            computedProject: () => {
-
-            }
+        mounted() {
+            let first = _.first(this.programmesList);
+            this.selectedProgramme(first.id);
         },
         methods: {
             selectedProgramme(id) {
