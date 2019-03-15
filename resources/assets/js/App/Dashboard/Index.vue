@@ -98,7 +98,6 @@
             selectedTask(id) {
                 this.currentTask = _.find(this.tasksList, ['id', id]);
                 this.commentsFilter(id);
-                console.log('selectedTask.selectedTaskComments', this.selectedTaskComments);
             },
             commentsFilter(id) {
                 this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
@@ -156,7 +155,6 @@
                 comment.created_at = moment().format('YYYY-MM-DD H:mm:ss');
                 this.commentsList.push(comment);
                 this.commentsFilter(this.currentTask.id);
-                console.log('addComment.selectedTaskComments', this.selectedTaskComments)
             },
             isEmpty(object) {
                 return JSON.stringify(object) === "{}";
@@ -208,10 +206,10 @@
                 commentsList: [
                     {id: 1, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 10:02:47'},
                     {id: 2, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:42:47'},
-                    {id: 3, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: ''},
-                    {id: 4, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 12:10:47'},
+                    {id: 3, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 11:42:47'},
+                    {id: 4, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 12:20:47'},
                     {id: 5, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 11:22:47'},
-                    {id: 6, task_id: 2, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:25:47'},
+                    {id: 6, task_id: 2, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 12:25:47'},
                 ],
                 widgets: {
                     programmes: {title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
