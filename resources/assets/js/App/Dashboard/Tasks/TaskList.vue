@@ -28,7 +28,7 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <div class="panel-body">
-                <task-item :tasks="tasks"></task-item>
+                <task-item :tasks="tasks" @selectEvent="selectTask"></task-item>
             </div>
         </div>
         <!-- /.panel-body -->
@@ -45,6 +45,11 @@
         },
         props: {
             tasks: Array
+        },
+        methods: {
+            selectTask(id) {
+                this.$emit('selectTask', id);
+            }
         }
     }
 </script>

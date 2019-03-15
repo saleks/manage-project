@@ -1,8 +1,8 @@
 <template>
     <ul class="nav nav-tabs nav-stacked">
         <template v-for="task in tasks">
-            <li>
-                <a href="project.html">
+            <li :class="{'bg-info': sel === task.id }">
+                <a @click.stop="selected(task.id)">
                     <div>
                         <p>
                             <strong>{{ task.name }}</strong>
@@ -38,7 +38,16 @@
         props: {
             tasks: Array
         },
+        data() {
+            return {
+                sel: null
+            }
+        },
         methods: {
+            selected(id) {
+                this.sel = id;
+                this.$emit('selectEvent', id);
+            },
             colorClass (progress) {
                 if (progress > 0 && progress <= 30) {
                     return 'progress-bar-success'

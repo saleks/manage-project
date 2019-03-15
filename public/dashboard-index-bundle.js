@@ -87,7 +87,7 @@ exports = module.exports = __webpack_require__(146)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -113,6 +113,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Comments_CommentsList__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Comments_CommentsList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Comments_CommentsList__);
 //
 //
 //
@@ -164,6 +166,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -182,7 +190,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         TaskList: __WEBPACK_IMPORTED_MODULE_3__Tasks_TaskList___default.a,
         AddProgrammeModal: __WEBPACK_IMPORTED_MODULE_4__Programs_AddProgrammeModal___default.a,
         AddProjectModal: __WEBPACK_IMPORTED_MODULE_5__Projects_AddProjectModal___default.a,
-        AddTaskModal: __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal___default.a
+        AddTaskModal: __WEBPACK_IMPORTED_MODULE_6__Tasks_AddTaskModal___default.a,
+        CommentsList: __WEBPACK_IMPORTED_MODULE_7__Comments_CommentsList___default.a
     },
     mounted: function mounted() {
         var first = _.first(this.programmesList);
@@ -203,6 +212,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         taskFilter: function taskFilter(id) {
             this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+        },
+        selectedTask: function selectedTask(id) {
+            this.currentTask = _.find(this.tasksList, ['id', id]);
+            this.commentsFilter(id);
+            console.log('selectedTask.selectedTaskComments', this.selectedTaskComments);
+        },
+        commentsFilter: function commentsFilter(id) {
+            this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
         },
         addProgramme: function addProgramme(programme) {
             var maxId = this.programmesList.reduce(function (prev, curr) {
@@ -247,6 +264,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.showModalTask = false;
             this.taskFilter(this.currentProject.id);
         },
+        addComment: function addComment(comment) {
+            var maxId = this.commentsList.reduce(function (prev, curr) {
+                return prev.id > curr.id ? prev.id : curr.id;
+            });
+            comment.id = ++maxId;
+            comment.task_id = this.currentTask.id;
+            comment.user = 'John Doe';
+            comment.created_at = moment().format('YYYY-MM-DD H:mm:ss');
+            this.commentsList.push(comment);
+            this.commentsFilter(this.currentTask.id);
+            console.log('addComment.selectedTaskComments', this.selectedTaskComments);
+        },
         isEmpty: function isEmpty(object) {
             return JSON.stringify(object) === "{}";
         },
@@ -263,6 +292,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showModalTask: false,
             showModalProject: false,
             showModalProgramme: false,
+            currentTask: {},
+            selectedTaskComments: [],
             currentProject: {},
             selectProjectTasks: [],
             currentProg: {},
@@ -270,9 +301,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             programmesList: [{ id: 1, name: 'Programme 1' }, { id: 2, name: 'Programme 2' }, { id: 3, name: 'Programme 3' }],
             projectList: [{ id: 1, programme_id: 1, name: 'PS001', status: 'Active' }, { id: 2, programme_id: 1, name: 'PS002', status: 'Active' }, { id: 3, programme_id: 1, name: 'PS003', status: 'Completed' }, { id: 4, programme_id: 1, name: 'PS004', status: 'Active' }, { id: 5, programme_id: 1, name: 'PS005', status: 'Archived' }, { id: 6, programme_id: 2, name: 'PS006', status: 'Active' }, { id: 7, programme_id: 1, name: 'PS007', status: 'Deleted' }, { id: 8, programme_id: 3, name: 'PS008', status: 'Active' }, { id: 9, programme_id: 1, name: 'PS009', status: 'Drafts' }],
             tasksList: [{ id: 1, project_id: 1, name: 'Sprint 0 - Analysis', progress: 100 }, { id: 2, project_id: 1, name: 'Sprint 0 - Scoping', progress: 80 }, { id: 3, project_id: 1, name: 'Sprint 1 - Development', progress: 70 }, { id: 4, project_id: 1, name: 'Sprint 1 - Showcasing', progress: 50 }, { id: 5, project_id: 2, name: 'Sprint 2 - Analysis2', progress: 30 }, { id: 6, project_id: 2, name: 'Sprint 2 - Scoping2', progress: 35 }, { id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30 }],
-            commentsList: [{ id: 1, task_id: 1, body: 'Comment text1', user: 'John Doe' }, { id: 2, task_id: 1, body: 'Comment text2', user: 'John Doe' }, { id: 3, task_id: 1, body: 'Comment text3', user: 'John Doe' }, { id: 4, task_id: 1, body: 'Comment text4', user: 'John Doe' }, { id: 5, task_id: 2, body: 'Comment text5', user: 'John Doe' }, { id: 6, task_id: 2, body: 'Comment text6', user: 'John Doe' }],
+            commentsList: [{ id: 1, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 10:02:47' }, { id: 2, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:42:47' }, { id: 3, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '' }, { id: 4, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 12:10:47' }, { id: 5, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 11:22:47' }, { id: 6, task_id: 2, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:25:47' }],
             widgets: {
-                programmes: { title: 'Programmes', count: this.count(this.programmesList), panelColorType: 'panel-primary', icon: 'fa-life-ring' },
+                programmes: { title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring' },
                 project: { title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt' },
                 tasks: { title: 'Tasks', count: this.count(), panelColorType: 'panel-yellow', icon: 'fa-cogs' },
                 comments: { title: 'Comments', count: this.count(), panelColorType: 'panel-red', icon: 'fa-comments' }
@@ -1964,7 +1995,7 @@ exports = module.exports = __webpack_require__(146)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2025,6 +2056,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: {
         tasks: Array
+    },
+    methods: {
+        selectTask: function selectTask(id) {
+            this.$emit('selectTask', id);
+        }
     }
 });
 
@@ -2117,7 +2153,7 @@ exports = module.exports = __webpack_require__(146)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2169,7 +2205,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         tasks: Array
     },
+    data: function data() {
+        return {
+            sel: null
+        };
+    },
+
     methods: {
+        selected: function selected(id) {
+            this.sel = id;
+            this.$emit('selectEvent', id);
+        },
         colorClass: function colorClass(progress) {
             if (progress > 0 && progress <= 30) {
                 return 'progress-bar-success';
@@ -2197,47 +2243,60 @@ var render = function() {
     [
       _vm._l(_vm.tasks, function(task) {
         return [
-          _c("li", [
-            _c("a", { attrs: { href: "project.html" } }, [
-              _c("div", [
-                _c("p", [
-                  _c("strong", [_vm._v(_vm._s(task.name))]),
+          _c("li", { class: { "bg-info": _vm.sel === task.id } }, [
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.selected(task.id)
+                  }
+                }
+              },
+              [
+                _c("div", [
+                  _c("p", [
+                    _c("strong", [_vm._v(_vm._s(task.name))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pull-right text-muted" }, [
+                      _vm._v(_vm._s(task.progress) + "% Complete")
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "pull-right text-muted" }, [
-                    _vm._v(_vm._s(task.progress) + "% Complete")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "progress progress-striped active",
-                    staticStyle: { width: "100%" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "progress-bar",
-                        class: _vm.colorClass(task.progress),
-                        style: "width: " + task.progress + "%",
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuenow": task.progress,
-                          "aria-valuemin": "0",
-                          "aria-valuemax": "100"
-                        }
-                      },
-                      [
-                        _c("span", { staticClass: "sr-only" }, [
-                          _vm._v(_vm._s(task.progress) + "% Complete (success)")
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "progress progress-striped active",
+                      staticStyle: { width: "100%" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          class: _vm.colorClass(task.progress),
+                          style: "width: " + task.progress + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": task.progress,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
+                        },
+                        [
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v(
+                              _vm._s(task.progress) + "% Complete (success)"
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("li", { staticClass: "divider" })
@@ -2307,7 +2366,12 @@ var render = function() {
       _c(
         "div",
         { staticClass: "panel-body" },
-        [_c("task-item", { attrs: { tasks: _vm.tasks } })],
+        [
+          _c("task-item", {
+            attrs: { tasks: _vm.tasks },
+            on: { selectEvent: _vm.selectTask }
+          })
+        ],
         1
       )
     ])
@@ -4938,7 +5002,15 @@ var render = function() {
             [
               _c("task-list", {
                 attrs: { tasks: _vm.selectProjectTasks },
-                on: { showedModalTask: _vm.showedModalTask }
+                on: {
+                  selectTask: _vm.selectedTask,
+                  showedModalTask: _vm.showedModalTask
+                }
+              }),
+              _vm._v(" "),
+              _c("comments-list", {
+                attrs: { comments: _vm.selectedTaskComments },
+                on: { sendEvent: _vm.addComment }
               })
             ],
             1
@@ -4998,6 +5070,362 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-23b718f2", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 325:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(326)
+}
+var normalizeComponent = __webpack_require__(148)
+/* script */
+var __vue_script__ = __webpack_require__(328)
+/* template */
+var __vue_template__ = __webpack_require__(329)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-44188f7c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/App/Dashboard/Comments/CommentsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44188f7c", Component.options)
+  } else {
+    hotAPI.reload("data-v-44188f7c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 326:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(327);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(147)("741fbba8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44188f7c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CommentsList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-44188f7c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CommentsList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 327:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(146)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 328:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "comments-list",
+    props: {
+        comments: Array
+    },
+    data: function data() {
+        return {
+            newComment: {
+                body: ''
+            }
+        };
+    },
+
+    methods: {
+        submit: function submit() {
+            this.$emit('sendEvent', this.newComment);
+            this.newComment = {};
+        },
+        formatDateHuman: function formatDateHuman(date) {
+            var minutes = moment().diff(date, 'minutes');
+            return moment.duration(minutes, "minutes").humanize(true);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 329:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "chat-panel panel panel-default" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "ul",
+        { staticClass: "chat" },
+        [
+          _vm._l(_vm.comments, function(comment, index) {
+            return [
+              !(index % 2)
+                ? _c("li", { staticClass: "left clearfix" }, [
+                    _vm._m(1, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat-body clearfix" }, [
+                      _c("div", { staticClass: "header" }, [
+                        _c("strong", { staticClass: "primary-font" }, [
+                          _vm._v(
+                            _vm._s(comment.user) + " " + _vm._s(index) + " "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "pull-right text-muted" }, [
+                          _c("i", { staticClass: "fa fa-clock-o fa-fw" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm.formatDateHuman(comment.created_at)) +
+                              "\n                            "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(comment.body) +
+                            "\n                        "
+                        )
+                      ])
+                    ])
+                  ])
+                : _c("li", { staticClass: "right clearfix" }, [
+                    _vm._m(2, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat-body clearfix" }, [
+                      _c("div", { staticClass: "header" }, [
+                        _c("small", { staticClass: " text-muted" }, [
+                          _c("i", { staticClass: "fa fa-clock-o fa-fw" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm.formatDateHuman(comment.created_at))
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "strong",
+                          { staticClass: "pull-right primary-font" },
+                          [
+                            _vm._v(
+                              _vm._s(comment.user) + " " + _vm._s(index) + " "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(comment.body) +
+                            "\n                        "
+                        )
+                      ])
+                    ])
+                  ])
+            ]
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-footer" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newComment.body,
+              expression: "newComment.body"
+            }
+          ],
+          staticClass: "form-control input-sm",
+          attrs: { type: "text", placeholder: "Type your message here..." },
+          domProps: { value: _vm.newComment.body },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.newComment, "body", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-warning btn-sm",
+              on: { click: _vm.submit }
+            },
+            [_vm._v("\n                    Send\n                ")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("i", { staticClass: "fa fa-comments fa-fw" }),
+      _vm._v(" Comments\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "chat-img pull-left" }, [
+      _c("img", {
+        staticClass: "img-circle",
+        attrs: { src: "http://placehold.it/50/55C1E7/fff", alt: "User Avatar" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "chat-img pull-right" }, [
+      _c("img", {
+        staticClass: "img-circle",
+        attrs: { src: "http://placehold.it/50/FA6F57/fff", alt: "User Avatar" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-44188f7c", module.exports)
   }
 }
 

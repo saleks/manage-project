@@ -33,9 +33,14 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <task-list :tasks="selectProjectTasks"
+                               @selectTask="selectedTask"
                                @showedModalTask="showedModalTask">
                     </task-list>
                     <!-- /.panel -->
+                    <comments-list
+                        :comments="selectedTaskComments"
+                        @sendEvent="addComment"
+                    ></comments-list>
                 </div>
                 <!-- /.col-lg-4 -->
             </div>
@@ -56,7 +61,8 @@
     import TaskList from './Tasks/TaskList';
     import AddProgrammeModal from './Programs/AddProgrammeModal';
     import AddProjectModal from './Projects/AddProjectModal';
-    import  AddTaskModal from './Tasks/AddTaskModal';
+    import AddTaskModal from './Tasks/AddTaskModal';
+    import CommentsList from './Comments/CommentsList';
 
     export default {
         name: "index",
@@ -67,7 +73,8 @@
             TaskList,
             AddProgrammeModal,
             AddProjectModal,
-            AddTaskModal
+            AddTaskModal,
+            CommentsList
         },
         mounted() {
             let first = _.first(this.programmesList);
@@ -87,6 +94,14 @@
             },
             taskFilter(id) {
                 this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+            },
+            selectedTask(id) {
+                this.currentTask = _.find(this.tasksList, ['id', id]);
+                this.commentsFilter(id);
+                console.log('selectedTask.selectedTaskComments', this.selectedTaskComments);
+            },
+            commentsFilter(id) {
+                this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
             },
             addProgramme(programme) {
                 let maxId = this.programmesList.reduce(function(prev, curr) {
@@ -131,6 +146,18 @@
                 this.showModalTask = false;
                 this.taskFilter(this.currentProject.id);
             },
+            addComment(comment) {
+                let maxId = this.commentsList.reduce(function(prev, curr) {
+                    return prev.id > curr.id ? prev.id : curr.id;
+                });
+                comment.id = ++maxId;
+                comment.task_id = this.currentTask.id;
+                comment.user = 'John Doe';
+                comment.created_at = moment().format('YYYY-MM-DD H:mm:ss');
+                this.commentsList.push(comment);
+                this.commentsFilter(this.currentTask.id);
+                console.log('addComment.selectedTaskComments', this.selectedTaskComments)
+            },
             isEmpty(object) {
                 return JSON.stringify(object) === "{}";
             },
@@ -147,6 +174,8 @@
                 showModalTask: false,
                 showModalProject: false,
                 showModalProgramme: false,
+                currentTask: {},
+                selectedTaskComments: [],
                 currentProject: {},
                 selectProjectTasks: [],
                 currentProg: {},
@@ -177,15 +206,15 @@
                     {id: 7, project_id: 2, name: 'Sprint 2 - Scoping3', progress: 30},
                 ],
                 commentsList: [
-                    {id: 1, task_id: 1, body: 'Comment text1', user: 'John Doe'},
-                    {id: 2, task_id: 1, body: 'Comment text2', user: 'John Doe'},
-                    {id: 3, task_id: 1, body: 'Comment text3', user: 'John Doe'},
-                    {id: 4, task_id: 1, body: 'Comment text4', user: 'John Doe'},
-                    {id: 5, task_id: 2, body: 'Comment text5', user: 'John Doe'},
-                    {id: 6, task_id: 2, body: 'Comment text6', user: 'John Doe'},
+                    {id: 1, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 10:02:47'},
+                    {id: 2, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:42:47'},
+                    {id: 3, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: ''},
+                    {id: 4, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 12:10:47'},
+                    {id: 5, task_id: 1, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'Jack Sparrow', created_at: '2019-03-15 11:22:47'},
+                    {id: 6, task_id: 2, body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.', user: 'John Doe', created_at: '2019-03-15 10:25:47'},
                 ],
                 widgets: {
-                    programmes: {title: 'Programmes', count: this.count(this.programmesList), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
+                    programmes: {title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
                     project: {title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt'},
                     tasks: {title: 'Tasks', count: this.count(), panelColorType: 'panel-yellow', icon: 'fa-cogs'},
                     comments: {title: 'Comments', count: this.count(), panelColorType: 'panel-red', icon: 'fa-comments'},
