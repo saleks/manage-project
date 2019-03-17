@@ -10,8 +10,8 @@ const subscribe = (store) => {
             /**
              * Set the Axios Authorization header with the token
              */
-            console.log('Auth.token', Auth.token)
-            httpSetToken(Auth.token)
+            console.log('Auth.token', Auth.token);
+            httpSetToken(Auth.token);
 
             /**
              * Sets the token to the local storage

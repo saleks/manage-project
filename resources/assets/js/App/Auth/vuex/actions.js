@@ -14,17 +14,15 @@ import {isEmpty} from 'lodash'
 export const login = ({dispatch}, payload) =>
     userService.login(payload)
         .then(response => {
-            console.log('actions response', response);
-            if(response.access_token) {
+            if(response.token) {
+                dispatch('setToken', response.token);
                 const auth = JSON.parse(localStorage.getItem('vuex'));
 
-                // if(auth.Auth.token){
-                //     http.defaults.headers.common.Authorization = 'Bearer ' + auth.Auth.token
-                // }
-                dispatch('setToken', response.access_token);
+                if(auth.Auth.token){
+                    http.defaults.headers.common.Authorization = 'Bearer ' + response.token
+                }
                 dispatch('loadUser');
             }
-
             return response;
         });
 /**
@@ -128,10 +126,10 @@ export const checkUserToken = ({dispatch, state}) => {
 export const loadUser = ({dispatch}) => userService.loadUserData()
 // store user's data
     .then(response => {
-        console.log('setUser');
         dispatch('setUser', response.data)
     })
     .catch(() => {
+        console.log('setUser reason');
         // Process failure, delete the token
         dispatch('setToken', '');
         return Promise.reject('FAIL_IN_LOAD_USER') // keep promise chain

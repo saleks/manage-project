@@ -1,5 +1,6 @@
 export const AppLayout = r => require.ensure([], () => r(require('../../Layouts/AppLayout')), 'dashboard-bundle'); //AppLayout.vue
 export const Home = r => require.ensure([], () => r(require('./Index')), 'dashboard-index-bundle');//Index.vue
+export const Programme = r => require.ensure([], () => r(require('./Programme')), 'dashboard-programme-bundle');//Index.vue
 
 
 export default [
@@ -18,6 +19,12 @@ export default [
             name: 'home',
             path: '/dashboard/home',
             component: Home,
+            meta: {requiresAuth: true},
+        },
+        {
+            name: 'programme',
+            path: '/dashboard/programme/:id',
+            component: Programme,
             meta: {requiresAuth: true},
         }
     ]

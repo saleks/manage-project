@@ -80,10 +80,10 @@
             submit () {
                 this.login(this.payload)
                     .then(response => {
-                        if (!response.access_token) {
-                            this.setToken(response.access_token)
+                        if (!response.token) {
+                            this.setToken(response.token)
                         } else {
-                            this.setToken(response.access_token);
+                            this.setToken(response.token);
                             this.$router.push({name: 'home'});
                             // this.$router.push({name: 'dashboard'})
                         }

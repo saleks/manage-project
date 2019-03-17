@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <i class="fa fa-percent fa-fw"></i> &#160;Project Status Tracker
             <div class="pull-right">
-                <button class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
+                <button v-if="isShowButton" class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
             </div>
         </div>
         <!-- /.panel-heading -->
@@ -62,6 +62,11 @@
             projectList: Array,
             tasksList: Array,
             showModalProject: Boolean,
+        },
+        computed: {
+            isShowButton () {
+                return this.$route.name !== 'home';
+            }
         },
         data() {
             return {

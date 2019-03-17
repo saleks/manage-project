@@ -1,8 +1,8 @@
-window.Vue = require('vue');
-window.Vuex = require('vuex');
-
 window.moment = require('moment');
 window._ = require('lodash');
+
+window.Vue = require('vue');
+window.Vuex = require('vuex');
 
 import router from './router/index';
 import store from './store';

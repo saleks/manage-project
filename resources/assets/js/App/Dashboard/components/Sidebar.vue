@@ -20,7 +20,7 @@
                     <a href="#"><i class="fa fa-life-ring fa-fw"></i> Programmes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li v-for="programme in programmes">
-                            <a @click.stop="selected(programme.id)">{{ programme.name }}</a>
+                            <router-link :to="{ name: 'programme', params: { id: programme.id }}">{{ programme.name }}</router-link>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -38,12 +38,7 @@
         props: {
             programmes: Array
         },
-        methods: {
-            selected(id) {
-                console.log('id', id);
-                this.$emit('selectEvent', id);
-            }
-        }
+        methods: {}
     }
 </script>
 
