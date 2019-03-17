@@ -56,7 +56,6 @@
 </template>
 
 <script>
-    import Cookies from 'js-cookie';
     import { mapActions } from 'vuex'
 
     export default {

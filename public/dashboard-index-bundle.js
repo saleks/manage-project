@@ -139,7 +139,7 @@ exports = module.exports = __webpack_require__(149)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -153,6 +153,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Sidebar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(8);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -381,6 +384,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -391,10 +395,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         programmes: Array
     },
-    methods: {
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["mapActions"])(['logout']), {
         selected: function selected(id) {
             this.$emit('selectedProgramme', id);
+        },
+        exit: function exit() {
+            var _this = this;
+
+            this.logout().then(function () {
+                _this.$router.push('/login');
+            });
+        },
+        toggleMenu: function toggleMenu() {
+            this.isOpen = !this.isOpen;
         }
+    }),
+    data: function data() {
+        return {
+            isOpen: false
+        };
     }
 });
 
@@ -678,7 +697,38 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _c("ul", { staticClass: "nav navbar-top-links navbar-right" }, [
+        _c("li", { staticClass: "dropdown", class: { open: _vm.isOpen } }, [
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-toggle",
+              attrs: { "data-toggle": "dropdown" },
+              on: { click: _vm.toggleMenu }
+            },
+            [
+              _c("i", { staticClass: "fa fa-user fa-fw" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-caret-down" })
+            ]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "dropdown-menu dropdown-user" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("li", { staticClass: "divider" }),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { on: { click: _vm.exit } }, [
+                _c("i", { staticClass: "fa fa-sign-out fa-fw" }),
+                _vm._v(" Logout")
+              ])
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("sidebar", {
         attrs: { programmes: _vm.programmes },
@@ -718,45 +768,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav navbar-top-links navbar-right" }, [
-      _c("li", { staticClass: "dropdown" }, [
-        _c(
-          "a",
-          {
-            staticClass: "dropdown-toggle",
-            attrs: { "data-toggle": "dropdown", href: "#" }
-          },
-          [
-            _c("i", { staticClass: "fa fa-user fa-fw" }),
-            _vm._v(" "),
-            _c("i", { staticClass: "fa fa-caret-down" })
-          ]
-        ),
-        _vm._v(" "),
-        _c("ul", { staticClass: "dropdown-menu dropdown-user" }, [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-user fa-fw" }),
-              _vm._v(" User Profile")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-gear fa-fw" }),
-              _vm._v(" Settings")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "divider" }),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "login.html" } }, [
-              _c("i", { staticClass: "fa fa-sign-out fa-fw" }),
-              _vm._v(" Logout")
-            ])
-          ])
-        ])
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-user fa-fw" }),
+        _vm._v(" User Profile")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-gear fa-fw" }),
+        _vm._v(" Settings")
       ])
     ])
   }
@@ -1481,7 +1507,7 @@ exports = module.exports = __webpack_require__(149)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1590,75 +1616,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         projectFilter: function projectFilter(id) {
             this.selectProgrammProj = _.filter(this.projectList, ['programme_id', id]);
         },
-
-        // selectedProject(id) {
-        //     this.currentProject = _.find(this.projectList, ['id', id]);
-        //     this.taskFilter(id);
-        // },
-        // taskFilter(id) {
-        //     this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
-        // },
-        // selectedTask(id) {
-        //     this.currentTask = _.find(this.tasksList, ['id', id]);
-        //     this.commentsFilter(id);
-        // },
-        // commentsFilter(id) {
-        //     this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
-        // },
         addProgramme: function addProgramme(programme) {
             this.saveNewProgramme(programme);
             this.showModalProgramme = false;
         },
-
-        // showedModalProject() {
-        //     if (this.isEmpty(this.currentProg)) {
-        //         return;
-        //     }
-        //     this.showModalProject = true;
-        // },
-        // addProject(project) {
-        //     let maxId = this.projectList.reduce(function(prev, curr) {
-        //         return prev.id > curr.id ? prev.id : curr.id;
-        //     });
-        //     project.id = ++maxId;
-        //     project.programme_id = this.currentProg.id;
-        //     this.projectList.push(project);
-        //     this.showModalProject = false;
-        //     this.projectFilter(this.currentProg.id);
-        // },
-        // showedModalTask() {
-        //     if (this.isEmpty(this.currentProject)) {
-        //         return;
-        //     }
-        //     this.showModalTask = true;
-        // },
-        // addTask(task) {
-        //     let maxId = this.tasksList.reduce(function(prev, curr) {
-        //         return prev.id > curr.id ? prev.id : curr.id;
-        //     });
-        //     task.id = ++maxId;
-        //     task.project_id = this.currentProject.id;
-        //     task.progress = Math.floor(task.progress);
-        //     task.start_date = moment(task.start_date).format('YYYY-MM-DD');
-        //     task.end_date = moment(task.end_date).format('YYYY-MM-DD');
-        //     this.tasksList.push(task);
-        //     this.showModalTask = false;
-        //     this.taskFilter(this.currentProject.id);
-        // },
-        // addComment(comment) {
-        //     let maxId = this.commentsList.reduce(function(prev, curr) {
-        //         return prev.id > curr.id ? prev.id : curr.id;
-        //     });
-        //     comment.id = ++maxId;
-        //     comment.task_id = this.currentTask.id;
-        //     comment.user = 'John Doe';
-        //     comment.created_at = moment().format('YYYY-MM-DD H:mm:ss');
-        //     this.commentsList.push(comment);
-        //     this.commentsFilter(this.currentTask.id);
-        // },
-        // isEmpty(object) {
-        //     return JSON.stringify(object) === "{}";
-        // },
         getWidget: function getWidget(name) {
             this.widgets[name].count = this.count(this[name + 'List']);
             return this.widgets[name];
