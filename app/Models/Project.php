@@ -17,4 +17,12 @@ class Project extends Model
     {
         return $this->belongsTo(Programme::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
