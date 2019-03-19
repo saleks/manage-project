@@ -506,7 +506,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -567,7 +567,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         toggleMenu: function toggleMenu(id) {
             this.sel = id;
-            console.log('toggle');
         }
     },
     data: function data() {
@@ -1018,7 +1017,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        console.log('this.projectList in project-status-tracker', this.projectList);
+        // console.log('this.projectList in project-status-tracker',this.projectList)
     },
 
     methods: {

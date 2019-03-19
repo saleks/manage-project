@@ -506,7 +506,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -567,7 +567,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         toggleMenu: function toggleMenu(id) {
             this.sel = id;
-            console.log('toggle');
         }
     },
     data: function data() {
@@ -1018,7 +1017,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        console.log('this.projectList in project-status-tracker', this.projectList);
+        // console.log('this.projectList in project-status-tracker',this.projectList)
     },
 
     methods: {
@@ -1553,7 +1552,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1650,7 +1649,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         selectProgrammProj: function selectProgrammProj() {
             var filter = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
-            console.log('filter', filter);
             return filter;
         }
     },
@@ -1659,9 +1657,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var _this = this;
 
         this.getDashboardData().then(function () {
-            console.log('this.programmesList', _this.programmesList);
             var first = _.first(_this.programmesList);
-            console.log(first.id);
             _this.selectedProgramme(first.id);
         });
     },
@@ -1669,7 +1665,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["mapActions"])(['saveNewProgramme', 'getDashboardData']), {
         selectedProgramme: function selectedProgramme(id) {
             this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
-            console.log('this.currentProg', this.currentProg);
             // this.projectFilter(id);
         },
 

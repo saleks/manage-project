@@ -72,8 +72,7 @@
             },
             selectProgrammProj() {
                 let filter = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
-                console.log('filter', filter);
-                return filter
+                return filter;
             }
         },
         created() {
@@ -82,9 +81,7 @@
         mounted() {
             this.getDashboardData()
                 .then(() => {
-                    console.log('this.programmesList', this.programmesList);
                     let first = _.first(this.programmesList);
-                    console.log(first.id);
                     this.selectedProgramme(first.id);
                 });
 
@@ -95,7 +92,6 @@
             ]),
             selectedProgramme(id) {
                 this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
-                console.log('this.currentProg',this.currentProg );
                 // this.projectFilter(id);
             },
             // projectFilter(id) {

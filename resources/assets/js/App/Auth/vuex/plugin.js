@@ -10,7 +10,7 @@ const subscribe = (store) => {
             /**
              * Set the Axios Authorization header with the token
              */
-            console.log('Auth.token', Auth.token);
+            // console.log('Auth.token', Auth.token);
             httpSetToken(Auth.token);
 
             /**

@@ -47,7 +47,6 @@
         methods: {
             toggleMenu(id) {
                 this.sel = id;
-                console.log('toggle')
             }
         },
         data() {

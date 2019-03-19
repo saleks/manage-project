@@ -3,10 +3,8 @@ import moment from 'moment';
 import * as dashboardService from '../service';
 
 export const getDashboardData = ({commit}) => {
-    console.log('action getDashboardData');
     dashboardService.loadDashboardData()
         .then(response => {
-            console.log('dashboard response', response);
             if (response.status === 'success') {
                 commit(TYPES.SET_DASHBOARD_DATA, response);
             }

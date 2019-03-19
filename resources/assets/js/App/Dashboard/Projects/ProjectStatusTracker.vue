@@ -74,7 +74,7 @@
             }
         },
         mounted(){
-            console.log('this.projectList in project-status-tracker',this.projectList)
+            // console.log('this.projectList in project-status-tracker',this.projectList)
         },
         methods: {
             projectFilter(status) {
