@@ -1033,12 +1033,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isOpen: false
         };
     },
-    mounted: function mounted() {
-        // console.log('this.projectList in project-status-tracker',this.projectList)
-    },
+    mounted: function mounted() {},
 
     methods: {
-        selectEvent: function selectEvent(id) {
+        selectProgrammeEvent: function selectProgrammeEvent(id) {
             this.$emit('selectedProgramme', id);
             this.isOpen = !this.isOpen;
         },
@@ -1062,7 +1060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             return newArr;
         },
-        selectProject: function selectProject(id) {
+        selectProjectEvent: function selectProjectEvent(id) {
             this.$emit('selectProject', id);
         }
     }
@@ -1399,7 +1397,9 @@ var render = function() {
                               {
                                 on: {
                                   click: function($event) {
-                                    return _vm.selectEvent(programme.id)
+                                    return _vm.selectProgrammeEvent(
+                                      programme.id
+                                    )
                                   }
                                 }
                               },
@@ -1509,7 +1509,7 @@ var render = function() {
               [
                 _c("project-status-item", {
                   attrs: { projects: _vm.projectFilter("Active") },
-                  on: { selectEvent: _vm.selectProject }
+                  on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
               1
@@ -1526,7 +1526,7 @@ var render = function() {
               [
                 _c("project-status-item", {
                   attrs: { projects: _vm.projectFilter("Completed") },
-                  on: { selectEvent: _vm.selectProject }
+                  on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
               1
@@ -1543,7 +1543,7 @@ var render = function() {
               [
                 _c("project-status-item", {
                   attrs: { projects: _vm.projectFilter("Archived") },
-                  on: { selectEvent: _vm.selectProject }
+                  on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
               1
@@ -1560,7 +1560,7 @@ var render = function() {
               [
                 _c("project-status-item", {
                   attrs: { projects: _vm.projectFilter("Deleted") },
-                  on: { selectEvent: _vm.selectProject }
+                  on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
               1
@@ -1577,7 +1577,7 @@ var render = function() {
               [
                 _c("project-status-item", {
                   attrs: { projects: _vm.projectFilter("Drafts") },
-                  on: { selectEvent: _vm.selectProject }
+                  on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
               1
@@ -1634,7 +1634,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -1661,6 +1661,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(8);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
 //
 //
 //
@@ -1750,34 +1753,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return this.$store.state.Dashboard.commentsList;
         },
         selectProgrammProj: function selectProgrammProj() {
-            var filter = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
-            return filter;
+            var projects = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
+            return projects;
         }
     },
-    created: function created() {},
     mounted: function mounted() {
         var _this = this;
 
         this.getDashboardData().then(function () {
-            var first = _.first(_this.programmesList);
-            _this.selectedProgramme(first.id);
+            var firstProg = _.first(_this.programmesList);
+            _this.selectedProgramme(firstProg.id);
         });
     },
 
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_6_vuex__["mapActions"])(['saveNewProgramme', 'getDashboardData']), {
         selectedProgramme: function selectedProgramme(id) {
             this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
-            // this.projectFilter(id);
+            this.selectDefaultProject();
+            this.selectDefaultTask();
         },
-
-        // projectFilter(id) {
-        //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)]);
-        //     console.log('this.selectProgrammProj',this.selectProgrammProj);
-        // },
+        selectDefaultProject: function selectDefaultProject() {
+            var firstProject = _.first(this.selectProgrammProj);
+            this.selectedProject(firstProject.id);
+        },
+        selectDefaultTask: function selectDefaultTask() {
+            var firstTask = _.first(this.selectProjectTasks);
+            if (!_.isEmpty(firstTask)) {
+                this.selectedTask(firstTask.id);
+            }
+        },
         selectedProject: function selectedProject(id) {
             this.currentProject = _.find(this.projectList, ['id', id]);
             this.taskFilter(id);
-            this.currentTask = {};
+            this.selectDefaultTask();
+            // this.currentTask = {};
             this.selectedTaskComments = [];
         },
         taskFilter: function taskFilter(id) {
@@ -1808,9 +1817,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             currentProg: {},
             currentProject: {},
             currentTask: {},
+            // selectProgrammProj: [],
             selectProjectTasks: [],
             selectedTaskComments: [],
-            // selectProgrammProj: [],
             widgets: {
                 programmes: { title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring' },
                 project: { title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt' },
@@ -2363,8 +2372,15 @@ var render = function() {
             { staticClass: "col-lg-4" },
             [
               _c("task-list", {
-                attrs: { tasks: _vm.selectProjectTasks },
-                on: { selectTask: _vm.selectedTask }
+                attrs: {
+                  tasks: _vm.selectProjectTasks,
+                  currentProject: _vm.currentProject,
+                  projectList: _vm.selectProgrammProj
+                },
+                on: {
+                  selectProject: _vm.selectedProject,
+                  selectTask: _vm.selectedTask
+                }
               }),
               _vm._v(" "),
               _c("comments-list", {
@@ -2498,7 +2514,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2543,13 +2559,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2558,12 +2567,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         TaskItem: __WEBPACK_IMPORTED_MODULE_0__TaskItem___default.a
     },
     props: {
-        tasks: Array
+        currentProject: Object,
+        tasks: Array,
+        projectList: Array
     },
+    computed: {
+        isHomePage: function isHomePage() {
+            return this.$route.name === 'home';
+        }
+    },
+    mounted: function mounted() {
+        // console.log( 'task-list projectList', this.projectList)
+    },
+
     methods: {
         selectTask: function selectTask(id) {
             this.$emit('selectTask', id);
+        },
+        selectProjectEvent: function selectProjectEvent(id) {
+            this.$emit('selectProject', id);
+            this.isOpen = !this.isOpen;
         }
+    },
+    data: function data() {
+        return {
+            isOpen: false
+        };
     }
 });
 
@@ -2844,23 +2873,71 @@ var render = function() {
       _c("i", { staticClass: "fa fa-bell fa-fw" }),
       _vm._v("  Tasks\n        "),
       _c("div", { staticClass: "pull-right" }, [
-        _c("div", { staticClass: "btn-group" }, [
+        _c("div", { staticClass: "btn-group", class: { open: _vm.isOpen } }, [
+          !_vm.isHomePage
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-xs",
+                  on: {
+                    click: function($event) {
+                      return _vm.$emit("showedModalTask")
+                    }
+                  }
+                },
+                [_vm._v("Add New Task")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "btn btn-primary btn-xs",
+              staticClass: "btn btn-default btn-xs dropdown-toggle",
+              attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.$emit("showedModalTask")
+                  _vm.isOpen = !_vm.isOpen
                 }
               }
             },
-            [_vm._v("Add New Task")]
+            [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.currentProject.name) +
+                  "  \n                    "
+              ),
+              _c("span", { staticClass: "caret" })
+            ]
           ),
           _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1)
+          _c(
+            "ul",
+            {
+              staticClass: "dropdown-menu pull-right",
+              attrs: { role: "menu" }
+            },
+            [
+              _vm._l(_vm.projectList, function(project) {
+                return [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.selectProjectEvent(project.id)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(project.name))]
+                    )
+                  ]),
+                  _c("li", { staticClass: "divider" })
+                ]
+              })
+            ],
+            2
+          )
         ])
       ])
     ]),
@@ -2880,54 +2957,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-default btn-xs dropdown-toggle",
-        attrs: { type: "button", "data-toggle": "dropdown" }
-      },
-      [
-        _vm._v("\n                    PS001  \n                    "),
-        _c("span", { staticClass: "caret" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "dropdown-menu pull-right", attrs: { role: "menu" } },
-      [
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Plant Support")])
-        ]),
-        _c("li", { staticClass: "divider" }),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Product Performance")])
-        ]),
-        _c("li", { staticClass: "divider" }),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Engineering")])]),
-        _vm._v(" "),
-        _c("li", { staticClass: "divider" }),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("OPs/QA")])]),
-        _vm._v(" "),
-        _c("li", { staticClass: "divider" }),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Raw Materials")])])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -3149,7 +3179,11 @@ var render = function() {
                     _c("div", { staticClass: "chat-body clearfix" }, [
                       _c("div", { staticClass: "header" }, [
                         _c("strong", { staticClass: "primary-font" }, [
-                          _vm._v(_vm._s(comment.user))
+                          _vm._v(
+                            _vm._s(comment.user.first_name) +
+                              " " +
+                              _vm._s(comment.user.last_name)
+                          )
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "pull-right text-muted" }, [
@@ -3187,7 +3221,13 @@ var render = function() {
                         _c(
                           "strong",
                           { staticClass: "pull-right primary-font" },
-                          [_vm._v(_vm._s(comment.user))]
+                          [
+                            _vm._v(
+                              _vm._s(comment.user.first_name) +
+                                " " +
+                                _vm._s(comment.user.last_name)
+                            )
+                          ]
                         )
                       ]),
                       _vm._v(" "),

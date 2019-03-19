@@ -3,24 +3,17 @@
         <div class="panel-heading">
             <i class="fa fa-bell fa-fw"></i> &#160;Tasks
             <div class="pull-right">
-                <div class="btn-group">
-                    <button class="btn btn-primary btn-xs" @click="$emit('showedModalTask')">Add New Task</button>
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                        PS001 &#160;
+                <div class="btn-group" :class="{'open' : isOpen}">
+                    <button v-if="!isHomePage" class="btn btn-primary btn-xs" @click="$emit('showedModalTask')">Add New Task</button>
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" @click="isOpen = !isOpen">
+                        {{ currentProject.name }} &#160;
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#">Plant Support</a>
-                        </li><li class="divider"></li>
-                        <li><a href="#">Product Performance</a>
-                        </li><li class="divider"></li>
-                        <li><a href="#">Engineering</a>
-                        </li> <li class="divider"></li>
-                        <li><a href="#">OPs/QA</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#">Raw Materials</a>
-                        </li>
+                        <template v-for="project in projectList">
+                            <li><a @click="selectProjectEvent(project.id)">{{ project.name }}</a>
+                            </li><li class="divider"></li>
+                        </template>
                     </ul>
                 </div>
             </div>
@@ -44,11 +37,30 @@
             TaskItem
         },
         props: {
-            tasks: Array
+            currentProject: Object,
+            tasks: Array,
+            projectList: Array
+        },
+        computed: {
+            isHomePage () {
+                return this.$route.name === 'home';
+            }
+        },
+        mounted() {
+            // console.log( 'task-list projectList', this.projectList)
         },
         methods: {
             selectTask(id) {
                 this.$emit('selectTask', id);
+            },
+            selectProjectEvent(id) {
+                this.$emit('selectProject', id);
+                this.isOpen = !this.isOpen;
+            }
+        },
+        data() {
+            return {
+                isOpen: false
             }
         }
     }

@@ -14,7 +14,7 @@
                     </span>
                         <div class="chat-body clearfix">
                             <div class="header">
-                                <strong class="primary-font">{{ comment.user }}</strong>
+                                <strong class="primary-font">{{ comment.user.first_name }} {{ comment.user.last_name }}</strong>
                                 <small class="pull-right text-muted">
                                     <i class="fa fa-clock-o fa-fw"></i> {{ formatDateHuman(comment.created_at) }}
                                 </small>
@@ -32,7 +32,7 @@
                             <div class="header">
                                 <small class=" text-muted">
                                     <i class="fa fa-clock-o fa-fw"></i> {{ formatDateHuman(comment.created_at) }}</small>
-                                <strong class="pull-right primary-font">{{ comment.user }}</strong>
+                                <strong class="pull-right primary-font">{{ comment.user.first_name }} {{ comment.user.last_name }}</strong>
                             </div>
                             <p>
                                 {{ comment.body }}

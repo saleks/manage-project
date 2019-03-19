@@ -12,7 +12,7 @@
                         </button>
                         <ul class="dropdown-menu pull-right" role="menu">
                             <template v-for="programme in programmesList">
-                                <li><a @click="selectEvent(programme.id)">{{ programme.name }}</a>
+                                <li><a @click="selectProgrammeEvent(programme.id)">{{ programme.name }}</a>
                                 </li><li class="divider"></li>
                             </template>
                         </ul>
@@ -44,19 +44,19 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade " :class="[ activetab === 1 ? 'in active' : '' ]" v-if="activetab === 1">
-                    <project-status-item @selectEvent="selectProject" :projects="projectFilter('Active')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Active')"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 2 ? 'in active' : '' ]" v-if="activetab === 2">
-                    <project-status-item @selectEvent="selectProject" :projects="projectFilter('Completed')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Completed')"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 3 ? 'in active' : '' ]" v-if="activetab === 3">
-                    <project-status-item @selectEvent="selectProject" :projects="projectFilter('Archived')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Archived')"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 4 ? 'in active' : '' ]" v-if="activetab === 4">
-                    <project-status-item @selectEvent="selectProject" :projects="projectFilter('Deleted')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Deleted')"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 5 ? 'in active' : '' ]" v-if="activetab === 5">
-                    <project-status-item @selectEvent="selectProject" :projects="projectFilter('Drafts')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Drafts')"></project-status-item>
                 </div>
             </div>
         </div>
@@ -91,10 +91,10 @@
             }
         },
         mounted(){
-            // console.log('this.projectList in project-status-tracker',this.projectList)
+
         },
         methods: {
-            selectEvent(id) {
+            selectProgrammeEvent(id) {
                 this.$emit('selectedProgramme', id);
                 this.isOpen = !this.isOpen;
             },
@@ -113,7 +113,7 @@
                 });
                 return newArr;
             },
-            selectProject(id) {
+            selectProjectEvent(id) {
                 this.$emit('selectProject', id);
             }
         }

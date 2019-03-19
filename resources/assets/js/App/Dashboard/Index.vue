@@ -35,6 +35,9 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <task-list :tasks="selectProjectTasks"
+                               :currentProject="currentProject"
+                               :projectList="selectProgrammProj"
+                               @selectProject="selectedProject"
                                @selectTask="selectedTask">
                     </task-list>
                     <!-- /.panel -->
@@ -88,20 +91,17 @@
                 return this.$store.state.Dashboard.commentsList;
             },
             selectProgrammProj() {
-                let filter = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
-                return filter;
+                let projects = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
+                return projects;
             }
-        },
-        created() {
-
         },
         mounted() {
             this.getDashboardData()
                 .then(() => {
-                    let first = _.first(this.programmesList);
-                    this.selectedProgramme(first.id);
-                });
+                    let firstProg = _.first(this.programmesList);
+                    this.selectedProgramme(firstProg.id);
 
+                });
         },
         methods: {
             ...mapActions([
@@ -109,16 +109,24 @@
             ]),
             selectedProgramme(id) {
                 this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
-                // this.projectFilter(id);
+                this.selectDefaultProject();
+                this.selectDefaultTask();
             },
-            // projectFilter(id) {
-            //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)]);
-            //     console.log('this.selectProgrammProj',this.selectProgrammProj);
-            // },
+            selectDefaultProject() {
+                let firstProject = _.first(this.selectProgrammProj);
+                this.selectedProject(firstProject.id);
+            },
+            selectDefaultTask() {
+                let firstTask = _.first(this.selectProjectTasks);
+                if (! _.isEmpty(firstTask)) {
+                    this.selectedTask(firstTask.id);
+                }
+            },
             selectedProject(id) {
                 this.currentProject = _.find(this.projectList, ['id', id]);
                 this.taskFilter(id);
-                this.currentTask = {};
+                this.selectDefaultTask();
+                // this.currentTask = {};
                 this.selectedTaskComments = [];
             },
             taskFilter(id) {
@@ -149,9 +157,9 @@
                 currentProg: {},
                 currentProject: {},
                 currentTask:{},
+                // selectProgrammProj: [],
                 selectProjectTasks: [],
                 selectedTaskComments: [],
-                // selectProgrammProj: [],
                 widgets: {
                     programmes: {title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
                     project: {title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt'},

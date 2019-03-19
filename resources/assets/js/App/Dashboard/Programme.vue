@@ -25,6 +25,9 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <task-list :tasks="selectProjectTasks"
+                               :currentProject="currentProject"
+                               :projectList="selectProgrammProj"
+                               @selectProject="selectedProject"
                                @selectTask="selectedTask"
                                @showedModalTask="showedModalTask">
                     </task-list>
@@ -66,8 +69,8 @@
             '$route' (to, from) {
                 // обрабатываем изменение параметров маршрута...
                 this.selectedProgramme(to.params.id);
-                this.currentTask = {};
-                this.currentProject = {};
+                // this.currentTask = {};
+                // this.currentProject = {};
                 this.selectedTaskComments = [];
                 this.selectProjectTasks = [];
             }
@@ -84,6 +87,10 @@
             },
             commentsList() {
                 return this.$store.state.Dashboard.commentsList;
+            },
+            selectProgrammProj() {
+                let projects = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
+                return projects;
             }
         },
         mounted() {
@@ -96,15 +103,27 @@
             ]),
             selectedProgramme(id) {
                 this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
-                this.projectFilter(id);
+                this.selectDefaultProject();
+                this.selectDefaultTask();
             },
-            projectFilter(id) {
-                this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
+            // projectFilter(id) {
+            //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
+            // },
+            selectDefaultProject() {
+                let firstProject = _.first(this.selectProgrammProj);
+                this.selectedProject(firstProject.id);
+            },
+            selectDefaultTask() {
+                let firstTask = _.first(this.selectProjectTasks);
+                if (! _.isEmpty(firstTask)) {
+                    this.selectedTask(firstTask.id);
+                }
             },
             selectedProject(id) {
                 this.currentProject = _.find(this.projectList, ['id', id]);
                 this.taskFilter(id);
-                this.currentTask = {};
+                // this.currentTask = {};
+                this.selectDefaultTask();
                 this.selectedTaskComments = [];
             },
             taskFilter(id) {
@@ -164,7 +183,7 @@
                 currentProject: {},
                 selectProjectTasks: [],
                 currentProg: {},
-                selectProgrammProj: []
+                // selectProgrammProj: []
             }
         }
     }
