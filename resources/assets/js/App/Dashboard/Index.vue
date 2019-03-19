@@ -23,13 +23,24 @@
             <div class="row">
                 <div class="col-lg-8">
                     <project-status-tracker
+                        :currentProg="currentProg"
+                        :programmesList="programmesList"
                         :projectList="selectProgrammProj"
-                        :tasksList="tasksList">
+                        :tasksList="tasksList"
+                        @selectedProgramme="selectedProgramme"
+                        @selectProject="selectedProject">
                     </project-status-tracker>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
+                    <task-list :tasks="selectProjectTasks"
+                               @selectTask="selectedTask">
+                    </task-list>
+                    <!-- /.panel -->
+                    <comments-list
+                        :comments="selectedTaskComments"
+                    ></comments-list>
                 </div>
                 <!-- /.col-lg-4 -->
             </div>
@@ -46,6 +57,9 @@
     import WidgetPanel from  './components/WidgetPanel';
     import ProjectStatusTracker from './Projects/ProjectStatusTracker';
     import AddProgrammeModal from './Programs/AddProgrammeModal';
+    import TaskList from './Tasks/TaskList';
+    import CommentsList from './Comments/CommentsList';
+
 
     import { mapActions } from 'vuex';
 
@@ -56,6 +70,9 @@
             WidgetPanel,
             ProjectStatusTracker,
             AddProgrammeModal,
+            TaskList,
+            CommentsList
+
         },
         computed: {
             programmesList() {
@@ -98,6 +115,22 @@
             //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)]);
             //     console.log('this.selectProgrammProj',this.selectProgrammProj);
             // },
+            selectedProject(id) {
+                this.currentProject = _.find(this.projectList, ['id', id]);
+                this.taskFilter(id);
+                this.currentTask = {};
+                this.selectedTaskComments = [];
+            },
+            taskFilter(id) {
+                this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+            },
+            selectedTask(id) {
+                this.currentTask = _.find(this.tasksList, ['id', id]);
+                this.commentsFilter(id);
+            },
+            commentsFilter(id) {
+                this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
+            },
             addProgramme(programme) {
                 this.saveNewProgramme(programme);
                 this.showModalProgramme = false;
@@ -114,6 +147,10 @@
             return {
                 showModalProgramme: false,
                 currentProg: {},
+                currentProject: {},
+                currentTask:{},
+                selectProjectTasks: [],
+                selectedTaskComments: [],
                 // selectProgrammProj: [],
                 widgets: {
                     programmes: {title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring'},

@@ -3,7 +3,21 @@
         <div class="panel-heading">
             <i class="fa fa-percent fa-fw"></i> &#160;Project Status Tracker
             <div class="pull-right">
-                <button v-if="isShowButton" class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
+                <div class="btn-group" :class="{'open' : isOpen}">
+                    <button v-if="!isHomePage" class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
+                    <template v-if="isHomePage">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" @click="isOpen = !isOpen">
+                            {{ currentProg.name }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <template v-for="programme in programmesList">
+                                <li><a @click="selectEvent(programme.id)">{{ programme.name }}</a>
+                                </li><li class="divider"></li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
             </div>
         </div>
         <!-- /.panel-heading -->
@@ -62,21 +76,28 @@
             projectList: Array,
             tasksList: Array,
             showModalProject: Boolean,
+            currentProg: Object,
+            programmesList: Array
         },
         computed: {
-            isShowButton () {
-                return this.$route.name !== 'home';
+            isHomePage () {
+                return this.$route.name === 'home';
             }
         },
         data() {
             return {
-                activetab: 1
+                activetab: 1,
+                isOpen: false
             }
         },
         mounted(){
             // console.log('this.projectList in project-status-tracker',this.projectList)
         },
         methods: {
+            selectEvent(id) {
+                this.$emit('selectedProgramme', id);
+                this.isOpen = !this.isOpen;
+            },
             projectFilter(status) {
                 let filtered = [], newArr = [];
                 filtered = _.filter(this.projectList, ['status.name', status]);
