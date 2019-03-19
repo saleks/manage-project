@@ -73,10 +73,13 @@
                 activetab: 1
             }
         },
+        mounted(){
+            console.log('this.projectList in project-status-tracker',this.projectList)
+        },
         methods: {
             projectFilter(status) {
                 let filtered = [], newArr = [];
-                filtered = _.filter(this.projectList, ['status', status]);
+                filtered = _.filter(this.projectList, ['status.name', status]);
                 newArr = _.map(filtered, (value) => {
                     let tasks = _.filter(this.tasksList, ['project_id', value.id]);
                     let progSumm = _.sumBy(tasks, (task) => {return task.progress});

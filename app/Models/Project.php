@@ -21,8 +21,13 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function projects()
+    public function tasks()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Task::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ProjectStatus::class);
     }
 }

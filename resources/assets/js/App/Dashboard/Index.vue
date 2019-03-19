@@ -69,23 +69,39 @@
             },
             commentsList() {
                 return this.$store.state.Dashboard.commentsList;
+            },
+            selectProgrammProj() {
+                let filter = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
+                console.log('filter', filter);
+                return filter
             }
         },
+        created() {
+
+        },
         mounted() {
-            let first = _.first(this.programmesList);
-            this.selectedProgramme(first.id);
+            this.getDashboardData()
+                .then(() => {
+                    console.log('this.programmesList', this.programmesList);
+                    let first = _.first(this.programmesList);
+                    console.log(first.id);
+                    this.selectedProgramme(first.id);
+                });
+
         },
         methods: {
             ...mapActions([
-                'saveNewProgramme',
+                'saveNewProgramme', 'getDashboardData'
             ]),
             selectedProgramme(id) {
-                this.currentProg = _.find(this.programmesList, ['id', id]);
-                this.projectFilter(id);
+                this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
+                console.log('this.currentProg',this.currentProg );
+                // this.projectFilter(id);
             },
-            projectFilter(id) {
-                this.selectProgrammProj = _.filter(this.projectList, ['programme_id', id])
-            },
+            // projectFilter(id) {
+            //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)]);
+            //     console.log('this.selectProgrammProj',this.selectProgrammProj);
+            // },
             addProgramme(programme) {
                 this.saveNewProgramme(programme);
                 this.showModalProgramme = false;
@@ -102,7 +118,7 @@
             return {
                 showModalProgramme: false,
                 currentProg: {},
-                selectProgrammProj: [],
+                // selectProgrammProj: [],
                 widgets: {
                     programmes: {title: 'Programmes', count: this.count(), panelColorType: 'panel-primary', icon: 'fa-life-ring'},
                     project: {title: 'Projects', count: this.count(), panelColorType: 'panel-green', icon: 'fa-product-hunt'},

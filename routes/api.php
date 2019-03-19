@@ -19,11 +19,14 @@ use Illuminate\Http\Request;
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'auth',
     'namespace' => 'API'
 ], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('user', 'AuthController@user');
+    Route::group(['prefix' => 'auth',
+    ], function ($router) {
+        Route::post('login', 'AuthController@login');
+        Route::post('logout', 'AuthController@logout');
+        Route::post('refresh', 'AuthController@refresh');
+        Route::post('user', 'AuthController@user');
+    });
+    Route::resource('dashboard', 'DashboardController');
 });

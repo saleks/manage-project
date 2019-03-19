@@ -15,4 +15,10 @@ export default {
     [TYPES.ADD_NEW_COMMENT] (state, comment) {
         state.commentsList.push(comment);
     },
+    [TYPES.SET_DASHBOARD_DATA] (state, data) {
+        state.programmesList = data.programmes;
+        state.projectList = data.projects;
+        state.tasksList = data.tasks;
+        state.commentsList = data.comments;
+    }
 }
