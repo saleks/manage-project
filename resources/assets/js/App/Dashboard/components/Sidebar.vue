@@ -16,15 +16,21 @@
                 <li>
                     <router-link :to="{ name: 'home' }"><i class="fa fa-dashboard fa-fw"></i> Dashboard</router-link>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-life-ring fa-fw"></i> Programmes <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li v-for="programme in programmes">
-                            <router-link :to="{ name: 'programme', params: { id: programme.id }}">{{ programme.name }}</router-link>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                <template v-for="programme in programmes">
+                    <li >
+                        <a @click="toggleMenu(programme.id)"><i class="fa fa-life-ring fa-fw"></i> {{ programme.name }} <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" :class="{'in': sel === programme.id }">
+                            <li >
+                                <router-link :class="{'active': sel === programme.id }" :to="{ name: 'programme', params: { id: programme.id }}">{{ programme.name }}</router-link>
+                            </li>
+                            <li>
+                                <a :class="{'active': sel === programme.id }" href="productpp.html">{{ programme.name }} By Assigned To</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </template>
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
@@ -38,7 +44,17 @@
         props: {
             programmes: Array
         },
-        methods: {}
+        methods: {
+            toggleMenu(id) {
+                this.sel = id;
+                console.log('toggle')
+            }
+        },
+        data() {
+            return {
+                sel: null
+            }
+        }
     }
 </script>
 

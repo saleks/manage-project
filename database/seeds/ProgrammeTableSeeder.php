@@ -14,9 +14,9 @@ class ProgrammeTableSeeder extends Seeder
     {
         $user = \App\Models\User::where('email', 'admin@example.com')->first();
         $programme = new Programme();
-        $programme->name = 'Programme 1';
+        $programme->name = 'Plant Support';
         $programme2 = new Programme();
-        $programme2->name = 'Programme 2';
+        $programme2->name = 'Product Performance';
 
         $user->programmes()->save($programme);
         $user->programmes()->save($programme2);

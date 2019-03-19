@@ -506,7 +506,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -552,13 +552,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "sidebar",
     props: {
         programmes: Array
     },
-    methods: {}
+    methods: {
+        toggleMenu: function toggleMenu(id) {
+            this.sel = id;
+            console.log('toggle');
+        }
+    },
+    data: function data() {
+        return {
+            sel: null
+        };
+    }
 });
 
 /***/ }),
@@ -575,50 +591,87 @@ var render = function() {
     { staticClass: "navbar-default sidebar", attrs: { role: "navigation" } },
     [
       _c("div", { staticClass: "sidebar-nav navbar-collapse" }, [
-        _c("ul", { staticClass: "nav", attrs: { id: "side-menu" } }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "li",
-            [
-              _c("router-link", { attrs: { to: { name: "home" } } }, [
-                _c("i", { staticClass: "fa fa-dashboard fa-fw" }),
-                _vm._v(" Dashboard")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("li", [
-            _vm._m(1),
+        _c(
+          "ul",
+          { staticClass: "nav", attrs: { id: "side-menu" } },
+          [
+            _vm._m(0),
             _vm._v(" "),
             _c(
-              "ul",
-              { staticClass: "nav nav-second-level" },
-              _vm._l(_vm.programmes, function(programme) {
-                return _c(
-                  "li",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        attrs: {
-                          to: {
-                            name: "programme",
-                            params: { id: programme.id }
-                          }
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "home" } } }, [
+                  _c("i", { staticClass: "fa fa-dashboard fa-fw" }),
+                  _vm._v(" Dashboard")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.programmes, function(programme) {
+              return [
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleMenu(programme.id)
                         }
-                      },
-                      [_vm._v(_vm._s(programme.name))]
-                    )
-                  ],
-                  1
-                )
-              }),
-              0
-            )
-          ])
-        ])
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-life-ring fa-fw" }),
+                      _vm._v(" " + _vm._s(programme.name) + " "),
+                      _c("span", { staticClass: "fa arrow" })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "nav nav-second-level collapse",
+                      class: { in: _vm.sel === programme.id }
+                    },
+                    [
+                      _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              class: { active: _vm.sel === programme.id },
+                              attrs: {
+                                to: {
+                                  name: "programme",
+                                  params: { id: programme.id }
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(programme.name))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            class: { active: _vm.sel === programme.id },
+                            attrs: { href: "productpp.html" }
+                          },
+                          [_vm._v(_vm._s(programme.name) + " By Assigned To")]
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            })
+          ],
+          2
+        )
       ])
     ]
   )
@@ -643,16 +696,6 @@ var staticRenderFns = [
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-life-ring fa-fw" }),
-      _vm._v(" Programmes "),
-      _c("span", { staticClass: "fa arrow" })
     ])
   }
 ]
