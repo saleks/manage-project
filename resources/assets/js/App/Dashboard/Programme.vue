@@ -71,7 +71,7 @@
                 // обрабатываем изменение параметров маршрута...
                 this.selectedProgramme(to.params.id);
                 this.selectedTaskComments = [];
-                this.selectProjectTasks = [];
+                // this.selectProjectTasks = [];
             }
         },
         computed: {
@@ -90,6 +90,9 @@
             selectProgrammProj() {
                 let projects = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
                 return projects;
+            },
+            selectProjectTasks() {
+                return _.filter(this.tasksList, ['project_id', this.currentProject.id]);
             }
         },
         mounted() {
@@ -128,13 +131,13 @@
             },
             selectedProject(id) {
                 this.currentProject = _.find(this.projectList, ['id', id]);
-                this.taskFilter(id);
+                // this.taskFilter(id);
                 this.selectDefaultTask();
                 this.selectedTaskComments = [];
             },
-            taskFilter(id) {
-                this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
-            },
+            // taskFilter(id) {
+            //     this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+            // },
             selectedTask(id) {
                 this.currentTask = _.find(this.tasksList, ['id', id]);
                 this.commentsFilter(id);
@@ -167,12 +170,17 @@
                 this.showModalTask = true;
             },
             addTask(task) {
-                let data = {task: task, project_id: this.currentProject.id};
+                console.log('addTask this.currentProject', this.currentProject);
+                let data = {
+                    type: 'task',
+                    entity: task,
+                    project_id: this.currentProject.id
+                };
                 this.saveNewTask(data)
                     .then(() => {
+                        console.log('addTask then');
                         this.showModalTask = false;
                     });
-                this.taskFilter(this.currentProject.id);
             },
             addComment(comment) {
                 if (_.isEmpty(this.currentTask)) {
@@ -193,7 +201,7 @@
                 currentTask: {},
                 selectedTaskComments: [],
                 currentProject: {},
-                selectProjectTasks: [],
+                // selectProjectTasks: [],
                 currentProg: {},
                 // selectProgrammProj: []
             }

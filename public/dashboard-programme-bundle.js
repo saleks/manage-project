@@ -2538,7 +2538,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2637,7 +2637,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             // обрабатываем изменение параметров маршрута...
             this.selectedProgramme(to.params.id);
             this.selectedTaskComments = [];
-            this.selectProjectTasks = [];
+            // this.selectProjectTasks = [];
         }
     },
     computed: {
@@ -2656,6 +2656,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         selectProgrammProj: function selectProgrammProj() {
             var projects = _.filter(this.projectList, ['programme_id', parseInt(this.currentProg.id)]);
             return projects;
+        },
+        selectProjectTasks: function selectProjectTasks() {
+            return _.filter(this.tasksList, ['project_id', this.currentProject.id]);
         }
     },
     mounted: function mounted() {
@@ -2693,13 +2696,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         selectedProject: function selectedProject(id) {
             this.currentProject = _.find(this.projectList, ['id', id]);
-            this.taskFilter(id);
+            // this.taskFilter(id);
             this.selectDefaultTask();
             this.selectedTaskComments = [];
         },
-        taskFilter: function taskFilter(id) {
-            this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
-        },
+
+        // taskFilter(id) {
+        //     this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
+        // },
         selectedTask: function selectedTask(id) {
             this.currentTask = _.find(this.tasksList, ['id', id]);
             this.commentsFilter(id);
@@ -2733,11 +2737,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         addTask: function addTask(task) {
             var _this = this;
 
-            var data = { task: task, project_id: this.currentProject.id };
+            console.log('addTask this.currentProject', this.currentProject);
+            var data = {
+                type: 'task',
+                entity: task,
+                project_id: this.currentProject.id
+            };
             this.saveNewTask(data).then(function () {
+                console.log('addTask then');
                 _this.showModalTask = false;
             });
-            this.taskFilter(this.currentProject.id);
         },
         addComment: function addComment(comment) {
             if (_.isEmpty(this.currentTask)) {
@@ -2757,7 +2766,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             currentTask: {},
             selectedTaskComments: [],
             currentProject: {},
-            selectProjectTasks: [],
+            // selectProjectTasks: [],
             currentProg: {}
             // selectProgrammProj: []
         };
@@ -3188,6 +3197,12 @@ exports.push([module.i, "\n.modal-mask[data-v-fa103bba] {\n    position: fixed;\
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_datepicker__ = __webpack_require__(325);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4936,13 +4951,25 @@ var render = function() {
                     }
                   },
                   [
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("0%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "10" } }, [_vm._v("10%")]),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "20" } }, [_vm._v("20%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "30" } }, [_vm._v("30%")]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "40" } }, [_vm._v("40%")]),
                     _vm._v(" "),
+                    _c("option", { attrs: { value: "50" } }, [_vm._v("50%")]),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "60" } }, [_vm._v("60%")]),
                     _vm._v(" "),
+                    _c("option", { attrs: { value: "70" } }, [_vm._v("70%")]),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "80" } }, [_vm._v("80%")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "90" } }, [_vm._v("90%")]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "100" } }, [_vm._v("100%")])
                   ]

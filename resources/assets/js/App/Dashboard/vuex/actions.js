@@ -22,7 +22,8 @@ export const saveNewProgramme = ({commit, state}, data) => {
             if (response.status === 'success') {
                 commit(TYPES.ADD_NEW_PROGRAMME, response.data);
             }
-            // console.log('saveNewProgramme - response', response);
+        }).catch(error => {
+            console.log('reason', error);
         });
     //
 
@@ -48,14 +49,27 @@ export const saveNewProject = ({commit, state}, data) => {
 
 export const saveNewTask = ({commit, state}, data) => {
     // Commit the mutations
-    let task = data.task;
-    task.id = state.tasksList.length + 1;
-    task.project_id = data.project_id;
-    task.progress = Math.floor(data.task.progress);
-    task.start_date = moment(data.task.start_date).format('YYYY-MM-DD');
-    task.end_date = moment(data.task.end_date).format('YYYY-MM-DD');
+    let task = data;
 
-    commit(TYPES.ADD_NEW_TASK, task);
+    console.log('saveNewTask data before', data);
+    // task.id = state.tasksList.length + 1;
+    // task.entity.project_id = data.project_id;
+    task.entity.progress = Math.floor(data.entity.progress);
+    task.entity.start_date = moment(data.entity.start_date).format('YYYY-MM-DD');
+    task.entity.end_date = moment(data.entity.end_date).format('YYYY-MM-DD');
+
+    // commit(TYPES.ADD_NEW_TASK, task);
+    console.log('saveNewTask data after', task);
+    dashboardService.store(task)
+        .then(response => {
+            console.log('saveNewTask response', response);
+            if (response.status === 'success') {
+                commit(TYPES.ADD_NEW_TASK, response.data);
+            }
+        })
+        .catch(error => {
+            console.log('reason', error);
+        });
 
     Promise.resolve(task) // keep promise chain
 };

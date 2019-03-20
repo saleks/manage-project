@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Services\ProgrammeService;
 use App\Services\ProjectService;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -58,6 +59,10 @@ class DashboardController extends Controller
                 break;
             case 'project':
                 $service = new ProjectService();
+                $entity = $service->save($request);
+                break;
+            case 'task':
+                $service = new TaskService();
                 $entity = $service->save($request);
                 break;
             default:
