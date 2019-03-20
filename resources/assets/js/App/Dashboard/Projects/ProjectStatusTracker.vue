@@ -44,19 +44,19 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade " :class="[ activetab === 1 ? 'in active' : '' ]" v-if="activetab === 1">
-                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Active')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter(1)"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 2 ? 'in active' : '' ]" v-if="activetab === 2">
-                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Completed')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter(2)"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 3 ? 'in active' : '' ]" v-if="activetab === 3">
-                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Archived')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter(3)"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 4 ? 'in active' : '' ]" v-if="activetab === 4">
-                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Deleted')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter(4)"></project-status-item>
                 </div>
                 <div class="tab-pane fade" :class="[ activetab === 5 ? 'in active' : '' ]" v-if="activetab === 5">
-                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter('Drafts')"></project-status-item>
+                    <project-status-item @selectEvent="selectProjectEvent" :projects="projectFilter(5)"></project-status-item>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
             }
         },
         mounted(){
-
+            // console.log('project-status-tracker this.projectList', this.projectList);
         },
         methods: {
             selectProgrammeEvent(id) {
@@ -100,7 +100,7 @@
             },
             projectFilter(status) {
                 let filtered = [], newArr = [];
-                filtered = _.filter(this.projectList, ['status.name', status]);
+                filtered = _.filter(this.projectList, ['status_id', status]);
                 newArr = _.map(filtered, (value) => {
                     let tasks = _.filter(this.tasksList, ['project_id', value.id]);
                     let progSumm = _.sumBy(tasks, (task) => {return task.progress});

@@ -1033,7 +1033,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isOpen: false
         };
     },
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        // console.log('project-status-tracker this.projectList', this.projectList);
+    },
 
     methods: {
         selectProgrammeEvent: function selectProgrammeEvent(id) {
@@ -1045,7 +1047,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var filtered = [],
                 newArr = [];
-            filtered = _.filter(this.projectList, ['status.name', status]);
+            filtered = _.filter(this.projectList, ['status_id', status]);
             newArr = _.map(filtered, function (value) {
                 var tasks = _.filter(_this.tasksList, ['project_id', value.id]);
                 var progSumm = _.sumBy(tasks, function (task) {
@@ -1508,7 +1510,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Active") },
+                  attrs: { projects: _vm.projectFilter(1) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1525,7 +1527,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Completed") },
+                  attrs: { projects: _vm.projectFilter(2) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1542,7 +1544,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Archived") },
+                  attrs: { projects: _vm.projectFilter(3) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1559,7 +1561,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Deleted") },
+                  attrs: { projects: _vm.projectFilter(4) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1576,7 +1578,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Drafts") },
+                  attrs: { projects: _vm.projectFilter(5) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],

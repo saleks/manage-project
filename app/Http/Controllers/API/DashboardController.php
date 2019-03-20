@@ -6,6 +6,8 @@ use App\Models\Comment;
 use App\Models\Programme;
 use App\Models\Project;
 use App\Models\Task;
+use App\Services\ProgrammeService;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,32 +41,42 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $model = new Programme();
-        $model->fill(request()->get('entity'));
         if (!auth()->check()) {
-            return response()->json(['not_auth' => 'Please auth'], 200);
+            return response()->json('Unauthenticated.', 401);
         }
         $user = auth()->user();
-        $programme = $user->programmes()->save($model);
-        $data = [
-            'user' => $user,
-            'programme' => $programme,
+
+        switch (request()->get('type')) {
+            case 'programme':
+                $service = new ProgrammeService($user);
+                $entity = $service->save($request);
+                break;
+            case 'project':
+                $service = new ProjectService();
+                $entity = $service->save($request);
+                break;
+            default:
+                $entity = null;
+        }
+
+        $response = [
+            'data' => $entity,
             'status' => 'success'
         ];
 
-        return response()->json($data, 200);
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +87,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

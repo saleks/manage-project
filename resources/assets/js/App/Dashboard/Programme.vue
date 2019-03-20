@@ -15,6 +15,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <project-status-tracker
+                        :currentProg="currentProg"
                         :projectList="selectProgrammProj"
                         :tasksList="tasksList"
                         @showedModalProject="showedModalProject"
@@ -69,8 +70,6 @@
             '$route' (to, from) {
                 // обрабатываем изменение параметров маршрута...
                 this.selectedProgramme(to.params.id);
-                // this.currentTask = {};
-                // this.currentProject = {};
                 this.selectedTaskComments = [];
                 this.selectProjectTasks = [];
             }
@@ -107,7 +106,9 @@
                 this.selectDefaultTask();
             },
             // projectFilter(id) {
+            //     console.log('projectFilter id', id)
             //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
+            //     console.log('projectFilter filtered', this.selectProgrammProj)
             // },
             selectDefaultProject() {
                 let firstProject = _.first(this.selectProgrammProj);
@@ -122,13 +123,12 @@
                 if (! _.isEmpty(firstTask)) {
                     this.selectedTask(firstTask.id);
                 } else {
-                    this.selectedTaskComments = []
+                    this.selectedTaskComments = [];
                 }
             },
             selectedProject(id) {
                 this.currentProject = _.find(this.projectList, ['id', id]);
                 this.taskFilter(id);
-                // this.currentTask = {};
                 this.selectDefaultTask();
                 this.selectedTaskComments = [];
             },
@@ -149,10 +149,16 @@
                 this.showModalProject = true;
             },
             addProject(project) {
-                let data = {project: project, programme_id: this.currentProg.id};
-                this.saveNewProject(data);
+                let data = {
+                    type: 'project',
+                    entity: project,
+                    programme_id: this.currentProg.id
+                };
+                this.saveNewProject(data)
+                    .then(response => {
+                        console.log('resp in component', response)
+                    });
                 this.showModalProject = false;
-                this.projectFilter(this.currentProg.id);
             },
             showedModalTask() {
                 if (_.isEmpty(this.currentProject)) {

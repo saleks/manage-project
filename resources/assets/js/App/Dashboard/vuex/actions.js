@@ -17,11 +17,10 @@ export const clearDashboardData = ({commit}) => {
 
 export const saveNewProgramme = ({commit, state}, data) => {
     let programme = data;
-    // programme.id = state.programmesList.length + 1;
     dashboardService.store(programme)
         .then(response => {
             if (response.status === 'success') {
-                commit(TYPES.ADD_NEW_PROGRAMME, response.programme);
+                commit(TYPES.ADD_NEW_PROGRAMME, response.data);
             }
             // console.log('saveNewProgramme - response', response);
         });
@@ -33,13 +32,18 @@ export const saveNewProgramme = ({commit, state}, data) => {
 
 export const saveNewProject = ({commit, state}, data) => {
     // Commit the mutations
-    let project = data.project;
-    project.id = state.projectList.length + 1;
-    project.programme_id = data.programme_id;
-
-    commit(TYPES.ADD_NEW_PROJECT, project);
-
-    Promise.resolve(project) // keep promise chain
+    let project = data;
+    // project.programme_id = data.programme_id;
+    dashboardService.store(project)
+        .then(response => {
+            if (response.status === 'success') {
+                commit(TYPES.ADD_NEW_PROJECT, response.data);
+            }
+        })
+        .catch(error => {
+            console.log('reason', error);
+        });
+    Promise.resolve(project)// keep promise chain
 };
 
 export const saveNewTask = ({commit, state}, data) => {

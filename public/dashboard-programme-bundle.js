@@ -1033,7 +1033,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isOpen: false
         };
     },
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        // console.log('project-status-tracker this.projectList', this.projectList);
+    },
 
     methods: {
         selectProgrammeEvent: function selectProgrammeEvent(id) {
@@ -1045,7 +1047,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var filtered = [],
                 newArr = [];
-            filtered = _.filter(this.projectList, ['status.name', status]);
+            filtered = _.filter(this.projectList, ['status_id', status]);
             newArr = _.map(filtered, function (value) {
                 var tasks = _.filter(_this.tasksList, ['project_id', value.id]);
                 var progSumm = _.sumBy(tasks, function (task) {
@@ -1508,7 +1510,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Active") },
+                  attrs: { projects: _vm.projectFilter(1) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1525,7 +1527,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Completed") },
+                  attrs: { projects: _vm.projectFilter(2) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1542,7 +1544,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Archived") },
+                  attrs: { projects: _vm.projectFilter(3) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1559,7 +1561,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Deleted") },
+                  attrs: { projects: _vm.projectFilter(4) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -1576,7 +1578,7 @@ var render = function() {
               },
               [
                 _c("project-status-item", {
-                  attrs: { projects: _vm.projectFilter("Drafts") },
+                  attrs: { projects: _vm.projectFilter(5) },
                   on: { selectEvent: _vm.selectProjectEvent }
                 })
               ],
@@ -2536,7 +2538,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2610,6 +2612,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -2633,8 +2636,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         '$route': function $route(to, from) {
             // обрабатываем изменение параметров маршрута...
             this.selectedProgramme(to.params.id);
-            // this.currentTask = {};
-            // this.currentProject = {};
             this.selectedTaskComments = [];
             this.selectProjectTasks = [];
         }
@@ -2670,7 +2671,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
 
         // projectFilter(id) {
+        //     console.log('projectFilter id', id)
         //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
+        //     console.log('projectFilter filtered', this.selectProgrammProj)
         // },
         selectDefaultProject: function selectDefaultProject() {
             var firstProject = _.first(this.selectProgrammProj);
@@ -2691,7 +2694,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         selectedProject: function selectedProject(id) {
             this.currentProject = _.find(this.projectList, ['id', id]);
             this.taskFilter(id);
-            // this.currentTask = {};
             this.selectDefaultTask();
             this.selectedTaskComments = [];
         },
@@ -2712,10 +2714,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.showModalProject = true;
         },
         addProject: function addProject(project) {
-            var data = { project: project, programme_id: this.currentProg.id };
-            this.saveNewProject(data);
+            var data = {
+                type: 'project',
+                entity: project,
+                programme_id: this.currentProg.id
+            };
+            this.saveNewProject(data).then(function (response) {
+                console.log('resp in component', response);
+            });
             this.showModalProject = false;
-            this.projectFilter(this.currentProg.id);
         },
         showedModalTask: function showedModalTask() {
             if (_.isEmpty(this.currentProject)) {
@@ -5023,6 +5030,7 @@ var render = function() {
             [
               _c("project-status-tracker", {
                 attrs: {
+                  currentProg: _vm.currentProg,
                   projectList: _vm.selectProgrammProj,
                   tasksList: _vm.tasksList
                 },
