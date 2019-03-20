@@ -70,8 +70,6 @@
             '$route' (to, from) {
                 // обрабатываем изменение параметров маршрута...
                 this.selectedProgramme(to.params.id);
-                this.selectedTaskComments = [];
-                // this.selectProjectTasks = [];
             }
         },
         computed: {
@@ -92,7 +90,12 @@
                 return projects;
             },
             selectProjectTasks() {
-                return _.filter(this.tasksList, ['project_id', this.currentProject.id]);
+                let tasks = _.filter(this.tasksList, ['project_id', this.currentProject.id]);
+                return _.isEmpty(tasks) ? [] : tasks;
+            },
+            selectedTaskComments() {
+                let comments =  _.filter(this.commentsList, ['task_id', this.currentTask.id]);
+                return _.isEmpty(comments) ? [] : comments;
             }
         },
         mounted() {
@@ -108,11 +111,6 @@
                 this.selectDefaultProject();
                 this.selectDefaultTask();
             },
-            // projectFilter(id) {
-            //     console.log('projectFilter id', id)
-            //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
-            //     console.log('projectFilter filtered', this.selectProgrammProj)
-            // },
             selectDefaultProject() {
                 let firstProject = _.first(this.selectProgrammProj);
                 if (! _.isEmpty(firstProject)) {
@@ -131,19 +129,10 @@
             },
             selectedProject(id) {
                 this.currentProject = _.find(this.projectList, ['id', id]);
-                // this.taskFilter(id);
                 this.selectDefaultTask();
-                this.selectedTaskComments = [];
             },
-            // taskFilter(id) {
-            //     this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
-            // },
             selectedTask(id) {
                 this.currentTask = _.find(this.tasksList, ['id', id]);
-                this.commentsFilter(id);
-            },
-            commentsFilter(id) {
-                this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
             },
             showedModalProject() {
                 if (_.isEmpty(this.currentProg)) {
@@ -170,7 +159,6 @@
                 this.showModalTask = true;
             },
             addTask(task) {
-                console.log('addTask this.currentProject', this.currentProject);
                 let data = {
                     type: 'task',
                     entity: task,
@@ -178,7 +166,7 @@
                 };
                 this.saveNewTask(data)
                     .then(() => {
-                        console.log('addTask then');
+                        // console.log('addTask then');
                         this.showModalTask = false;
                     });
             },
@@ -186,12 +174,15 @@
                 if (_.isEmpty(this.currentTask)) {
                     return;
                 }
-                let data = {comment: comment, task_id: this.currentTask.id};
+                let data = {
+                    type: 'comment',
+                    entity: comment,
+                    task_id: this.currentTask.id
+                };
                 this.saveNewComment(data)
-                    .then(() => {
-                        data = {};
+                    .then((resp) => {
+                        console.log('saveNewComment in component', resp);
                     });
-                this.commentsFilter(this.currentTask.id);
             }
         },
         data() {
@@ -199,10 +190,10 @@
                 showModalTask: false,
                 showModalProject: false,
                 currentTask: {},
-                selectedTaskComments: [],
-                currentProject: {},
-                // selectProjectTasks: [],
                 currentProg: {},
+                currentProject: {},
+                // selectedTaskComments: [],
+                // selectProjectTasks: [],
                 // selectProgrammProj: []
             }
         }

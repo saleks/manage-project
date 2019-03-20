@@ -47,7 +47,7 @@
             <div class="input-group">
                 <input v-model="newComment.body" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                 <span class="input-group-btn">
-                    <button class="btn btn-warning btn-sm" @click="submit">
+                    <button class="btn btn-warning btn-sm" @click="submit" :class="{ 'disabled' : isHomePage }">
                         Send
                     </button>
                 </span>
@@ -68,6 +68,11 @@
                 newComment: {
                     body: ''
                 }
+            }
+        },
+        computed: {
+            isHomePage () {
+                return this.$route.name === 'home';
             }
         },
         methods: {

@@ -2230,7 +2230,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2315,6 +2315,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        isHomePage: function isHomePage() {
+            return this.$route.name === 'home';
+        }
+    },
     methods: {
         submit: function submit() {
             this.$emit('sendEvent', this.newComment);
@@ -2450,6 +2455,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-warning btn-sm",
+              class: { disabled: _vm.isHomePage },
               on: { click: _vm.submit }
             },
             [_vm._v("\n                    Send\n                ")]
@@ -2538,7 +2544,7 @@ exports = module.exports = __webpack_require__(151)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -2636,8 +2642,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         '$route': function $route(to, from) {
             // обрабатываем изменение параметров маршрута...
             this.selectedProgramme(to.params.id);
-            this.selectedTaskComments = [];
-            // this.selectProjectTasks = [];
         }
     },
     computed: {
@@ -2658,7 +2662,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return projects;
         },
         selectProjectTasks: function selectProjectTasks() {
-            return _.filter(this.tasksList, ['project_id', this.currentProject.id]);
+            var tasks = _.filter(this.tasksList, ['project_id', this.currentProject.id]);
+            return _.isEmpty(tasks) ? [] : tasks;
+        },
+        selectedTaskComments: function selectedTaskComments() {
+            var comments = _.filter(this.commentsList, ['task_id', this.currentTask.id]);
+            return _.isEmpty(comments) ? [] : comments;
         }
     },
     mounted: function mounted() {
@@ -2672,12 +2681,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.selectDefaultProject();
             this.selectDefaultTask();
         },
-
-        // projectFilter(id) {
-        //     console.log('projectFilter id', id)
-        //     this.selectProgrammProj = _.filter(this.projectList, ['programme_id', parseInt(id)])
-        //     console.log('projectFilter filtered', this.selectProgrammProj)
-        // },
         selectDefaultProject: function selectDefaultProject() {
             var firstProject = _.first(this.selectProgrammProj);
             if (!_.isEmpty(firstProject)) {
@@ -2696,20 +2699,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         selectedProject: function selectedProject(id) {
             this.currentProject = _.find(this.projectList, ['id', id]);
-            // this.taskFilter(id);
             this.selectDefaultTask();
-            this.selectedTaskComments = [];
         },
-
-        // taskFilter(id) {
-        //     this.selectProjectTasks = _.filter(this.tasksList, ['project_id', id]);
-        // },
         selectedTask: function selectedTask(id) {
             this.currentTask = _.find(this.tasksList, ['id', id]);
-            this.commentsFilter(id);
-        },
-        commentsFilter: function commentsFilter(id) {
-            this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
         },
         showedModalProject: function showedModalProject() {
             if (_.isEmpty(this.currentProg)) {
@@ -2737,14 +2730,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         addTask: function addTask(task) {
             var _this = this;
 
-            console.log('addTask this.currentProject', this.currentProject);
             var data = {
                 type: 'task',
                 entity: task,
                 project_id: this.currentProject.id
             };
             this.saveNewTask(data).then(function () {
-                console.log('addTask then');
+                // console.log('addTask then');
                 _this.showModalTask = false;
             });
         },
@@ -2752,11 +2744,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             if (_.isEmpty(this.currentTask)) {
                 return;
             }
-            var data = { comment: comment, task_id: this.currentTask.id };
-            this.saveNewComment(data).then(function () {
-                data = {};
+            var data = {
+                type: 'comment',
+                entity: comment,
+                task_id: this.currentTask.id
+            };
+            this.saveNewComment(data).then(function (resp) {
+                console.log('saveNewComment in component', resp);
             });
-            this.commentsFilter(this.currentTask.id);
         }
     }),
     data: function data() {
@@ -2764,10 +2759,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             showModalTask: false,
             showModalProject: false,
             currentTask: {},
-            selectedTaskComments: [],
-            currentProject: {},
+            currentProg: {},
+            currentProject: {}
+            // selectedTaskComments: [],
             // selectProjectTasks: [],
-            currentProg: {}
             // selectProgrammProj: []
         };
     }

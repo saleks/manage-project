@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Programme;
 use App\Models\Project;
 use App\Models\Task;
+use App\Services\CommentService;
 use App\Services\ProgrammeService;
 use App\Services\ProjectService;
 use App\Services\TaskService;
@@ -63,6 +64,10 @@ class DashboardController extends Controller
                 break;
             case 'task':
                 $service = new TaskService();
+                $entity = $service->save($request);
+                break;
+            case 'comment':
+                $service = new CommentService($user);
                 $entity = $service->save($request);
                 break;
             default:
