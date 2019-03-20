@@ -44,7 +44,20 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Programme();
+        $model->fill(request()->get('entity'));
+        if (!auth()->check()) {
+            return response()->json(['not_auth' => 'Please auth'], 200);
+        }
+        $user = auth()->user();
+        $programme = $user->programmes()->save($model);
+        $data = [
+            'user' => $user,
+            'programme' => $programme,
+            'status' => 'success'
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**

@@ -35,7 +35,6 @@
         data() {
             return {
                 programme: {
-                    id: null,
                     name: ''
                 }
             }

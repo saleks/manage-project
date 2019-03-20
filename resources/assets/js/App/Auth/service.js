@@ -33,3 +33,8 @@ export const sendResetLink = (payload) => http.post('/auth/password/email', payl
  * Get current user
  */
 export const loadUserData = () => http.post('/auth/user').then(getData);
+
+/**
+ * Get current user
+ */
+export const refreshToken = () => http.post('/auth/refresh').then(getData);

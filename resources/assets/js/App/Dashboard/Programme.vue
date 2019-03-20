@@ -111,12 +111,18 @@
             // },
             selectDefaultProject() {
                 let firstProject = _.first(this.selectProgrammProj);
-                this.selectedProject(firstProject.id);
+                if (! _.isEmpty(firstProject)) {
+                    this.selectedProject(firstProject.id);
+                } else {
+                    this.selectProjectTasks = [];
+                }
             },
             selectDefaultTask() {
                 let firstTask = _.first(this.selectProjectTasks);
                 if (! _.isEmpty(firstTask)) {
                     this.selectedTask(firstTask.id);
+                } else {
+                    this.selectedTaskComments = []
                 }
             },
             selectedProject(id) {

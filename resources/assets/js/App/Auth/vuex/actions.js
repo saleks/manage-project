@@ -50,6 +50,7 @@ export const logout = ({dispatch}) => {
     //userService.revokeToken()
     // call actions
     return Promise.all([
+        dispatch('clearDashboardData'),
         dispatch('setToken', ''),
         dispatch('setUser', {})
     ])
@@ -123,10 +124,14 @@ export const checkUserToken = ({dispatch, state}) => {
  * Retrieves updated user information
  * If something goes wrong, the user's token is probably invalid
  */
-export const loadUser = ({dispatch}) => userService.loadUserData()
+export const loadUser = ({dispatch}) => userService.refreshToken()
 // store user's data
     .then(response => {
-        dispatch('setUser', response.data)
+        dispatch('setToken', response.token);
+        userService.loadUserData().then(response => {
+                dispatch('setUser', response.data)
+            }
+        );
     })
     .catch(() => {
         console.log('setUser reason');

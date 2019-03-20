@@ -114,12 +114,18 @@
             },
             selectDefaultProject() {
                 let firstProject = _.first(this.selectProgrammProj);
-                this.selectedProject(firstProject.id);
+                if (! _.isEmpty(firstProject)) {
+                    this.selectedProject(firstProject.id);
+                } else {
+                    this.selectProjectTasks = [];
+                }
             },
             selectDefaultTask() {
                 let firstTask = _.first(this.selectProjectTasks);
                 if (! _.isEmpty(firstTask)) {
                     this.selectedTask(firstTask.id);
+                } else {
+                    this.selectedTaskComments = []
                 }
             },
             selectedProject(id) {
@@ -140,7 +146,11 @@
                 this.selectedTaskComments = _.filter(this.commentsList, ['task_id', id]);
             },
             addProgramme(programme) {
-                this.saveNewProgramme(programme);
+                let data = {
+                    type: 'programme',
+                    entity: programme
+                };
+                this.saveNewProgramme(data);
                 this.showModalProgramme = false;
             },
             getWidget(name){

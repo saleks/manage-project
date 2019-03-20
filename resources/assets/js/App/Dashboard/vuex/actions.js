@@ -11,10 +11,21 @@ export const getDashboardData = ({commit}) => {
         })
 };
 
+export const clearDashboardData = ({commit}) => {
+    commit(TYPES.CLEAR_DASHBOARD_DATA);
+};
+
 export const saveNewProgramme = ({commit, state}, data) => {
     let programme = data;
-    programme.id = state.programmesList.length + 1;
-    commit(TYPES.ADD_NEW_PROGRAMME, programme);
+    // programme.id = state.programmesList.length + 1;
+    dashboardService.store(programme)
+        .then(response => {
+            if (response.status === 'success') {
+                commit(TYPES.ADD_NEW_PROGRAMME, response.programme);
+            }
+            // console.log('saveNewProgramme - response', response);
+        });
+    //
 
     Promise.resolve(programme);
 };

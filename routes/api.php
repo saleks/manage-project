@@ -17,16 +17,19 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::group([
-    'middleware' => 'api',
-    'namespace' => 'API'
-], function ($router) {
-    Route::group(['prefix' => 'auth',
-    ], function ($router) {
+Route::group(['namespace' => 'API'], function () {
+    Route::group(['prefix' => 'auth','middleware' => 'guest'], function () {
         Route::post('login', 'AuthController@login');
-        Route::post('logout', 'AuthController@logout');
-        Route::post('refresh', 'AuthController@refresh');
-        Route::post('user', 'AuthController@user');
     });
-    Route::resource('dashboard', 'DashboardController');
+    Route::group(['middleware' => 'jwt.refresh', 'prefix' => 'auth' ], function () {
+        Route::post('refresh', 'AuthController@refresh');
+    });
+
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::group(['prefix' => 'auth'], function () {
+            Route::post('user', 'AuthController@user');
+            Route::post('logout', 'AuthController@logout');
+        });
+        Route::resource('dashboard', 'DashboardController');
+    });
 });

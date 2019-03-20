@@ -7,3 +7,5 @@ import { getData } from '../../utils/get'
  * Get current user
  */
 export const loadDashboardData = () => http.get('/dashboard').then(getData);
+
+export const store = (data) => http.post('/dashboard', data).then(getData);

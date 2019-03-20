@@ -20,5 +20,11 @@ export default {
         state.projectList = data.projects;
         state.tasksList = data.tasks;
         state.commentsList = data.comments;
+    },
+    [TYPES.CLEAR_DASHBOARD_DATA] (state) {
+        state.programmesList = [];
+        state.projectList = [];
+        state.tasksList = [];
+        state.commentsList = [];
     }
 }
