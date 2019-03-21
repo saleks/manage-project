@@ -1,6 +1,6 @@
-export const AppLayout = r => require.ensure([], () => r(require('../../Layouts/AppLayout')), 'dashboard-bundle'); //AppLayout.vue
-export const Home = r => require.ensure([], () => r(require('./Index')), 'dashboard-index-bundle');//Index.vue
-export const Programme = r => require.ensure([], () => r(require('./Programme')), 'dashboard-programme-bundle');//Index.vue
+export const AppLayout = r => require.ensure([], () => r(require('../../Layouts/AppLayout')), 'js/dashboard-bundle'); //AppLayout.vue
+export const Home = r => require.ensure([], () => r(require('./Index')), 'js/dashboard-index-bundle');//Index.vue
+export const Programme = r => require.ensure([], () => r(require('./Programme')), 'js/dashboard-programme-bundle');//Index.vue
 
 
 export default [

@@ -1,7 +1,7 @@
-export const AuthLayout = r => require.ensure([], () => r(require('../../Layouts/Auth')), 'layouts-bundle'); //AppLayout.vue
-export const Login = r => require.ensure([], () => r(require('./Login')), 'login-bundle');//Login.vue
-export const Register = r => require.ensure([], () => r(require('./Register')), 'register-bundle');//Register.vue
-export const ForgotPassword = r => require.ensure([], () => r(require('./ForgotPassword')), 'forgotPassword-bundle');//ForgotPassword.vue
+export const AuthLayout = r => require.ensure([], () => r(require('../../Layouts/Auth')), 'js/layouts-bundle'); //AppLayout.vue
+export const Login = r => require.ensure([], () => r(require('./Login')), 'js/login-bundle');//Login.vue
+export const Register = r => require.ensure([], () => r(require('./Register')), 'js/register-bundle');//Register.vue
+export const ForgotPassword = r => require.ensure([], () => r(require('./ForgotPassword')), 'js/forgotPassword-bundle');//ForgotPassword.vue
 
 
 export default [

@@ -1,11 +1,11 @@
 {
-    "/dashboard-programme-bundle.js": "/dashboard-programme-bundle.js",
-    "/dashboard-index-bundle.js": "/dashboard-index-bundle.js",
-    "/layouts-bundle.js": "/layouts-bundle.js",
-    "/dashboard-bundle.js": "/dashboard-bundle.js",
-    "/register-bundle.js": "/register-bundle.js",
-    "/login-bundle.js": "/login-bundle.js",
-    "/forgotPassword-bundle.js": "/forgotPassword-bundle.js",
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/layouts-bundle.js": "/js/layouts-bundle.js",
+    "/js/register-bundle.js": "/js/register-bundle.js",
+    "/js/login-bundle.js": "/js/login-bundle.js",
+    "/js/forgotPassword-bundle.js": "/js/forgotPassword-bundle.js",
+    "/js/dashboard-programme-bundle.js": "/js/dashboard-programme-bundle.js",
+    "/js/dashboard-index-bundle.js": "/js/dashboard-index-bundle.js",
+    "/js/dashboard-bundle.js": "/js/dashboard-bundle.js"
 }
