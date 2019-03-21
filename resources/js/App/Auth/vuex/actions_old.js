@@ -1,6 +1,6 @@
 import * as TYPES from './mutations-types'
 import * as userService from '../service'
-import {http} from "../../../plugins/http"
+import {http} from "../../../plugins/http/index"
 import localforage from 'localforage'
 import {isEmpty} from 'lodash'
 

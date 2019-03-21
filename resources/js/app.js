@@ -2,9 +2,10 @@ window.moment = require('moment');
 window._ = require('lodash');
 
 window.Vue = require('vue');
-window.Vuex = require('vuex');
 
-import router from './router/index';
+// window.Vuex = require('vuex');
+
+import router from './router';
 import store from './store';
 
 import httpPlugin from './plugins/http'
@@ -14,14 +15,13 @@ import httpPlugin from './plugins/http'
  * Send store and router to httpPlugin (injection)
  */
 Vue.use(httpPlugin, {store, router});
-// import Cookies from 'js-cookie';
-// window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + Cookies.get('access_token');
 
-const App = require('./App/App.vue');
+Vue.config.productionTip = false;
+
+Vue.component('app', require('./App/App'));
 
 const app = new Vue({
-    el: '#app',
-    components: { App },
     router,
-    store
+    store,
+    el: '#app'
 });

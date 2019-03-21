@@ -14,17 +14,18 @@
                                 </div>
                                 <form class="user" @submit.prevent="submit" method="post">
                                     <div class="form-group">
-                                        <input v-model="payload.email" type="email" class="form-control form-control-user"
+                                        <input v-model="email" type="email" class="form-control form-control-user"
                                                id="exampleInputEmail" aria-describedby="emailHelp"
                                                placeholder="Enter Email Address...">
                                     </div>
                                     <div class="form-group">
-                                        <input v-model="payload.password" type="password" class="form-control form-control-user"
+                                        <input v-model="password" type="password" class="form-control form-control-user"
                                                id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck" v-model="payload.remember">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                   v-model="remember">
                                             <label class="custom-control-label" for="customCheck">Remember Me</label>
                                         </div>
                                     </div>
@@ -41,10 +42,12 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <router-link class="small" :to="{ name: 'forgot-password' }">Forgot Password?</router-link>
+                                    <router-link class="small" :to="{ name: 'forgot-password' }">Forgot Password?
+                                    </router-link>
                                 </div>
                                 <div class="text-center">
-                                    <router-link class="small" :to="{ name: 'register' }">Create an Account!</router-link>
+                                    <router-link class="small" :to="{ name: 'register' }">Create an Account!
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -56,36 +59,44 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import * as authService from '../../services/auth.service'
+
+    import { mapActions} from 'vuex'
 
     export default {
         name: "LoginComponent",
         mounted() {
             console.log('Component Login mounted.')
         },
-        data () {
+        data() {
             return {
-                payload: {
-                    email: '',
-                    password: '',
-                    remember: false
-                }
+                email: '',
+                password: '',
+                remember: false
             }
         },
         methods: {
             ...mapActions([
-                'login', 'setToken'
+                'getCurrent', 'getRoles'
             ]),
-            submit () {
-                this.login(this.payload)
-                    .then(response => {
-                        if (!response.token) {
-                            this.setToken(response.token)
-                        } else {
-                            this.setToken(response.token);
-                            this.$router.push({name: 'home'});
-                            // this.$router.push({name: 'dashboard'})
-                        }
+            submit() {
+                authService.makeLogin({
+                    email: this.email,
+                    password: this.password
+                }).then(response => {
+                    console.log('authService.makeLogin', response)
+                }).then(() => {
+                    this.getCurrent().then(() => {
+                        this.getRoles().then().catch((error) => {
+                            console.log('getRoles error', error)
+                        });
+                    })
+                        .catch((error) => {
+                            console.log('getCurrent error', error)
+                        });
+                })
+                    .catch((error) => {
+                        console.log('authService.makeLogin error', error)
                     });
             }
         }

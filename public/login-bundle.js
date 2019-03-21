@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 216:
+/***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(152)
+var normalizeComponent = __webpack_require__(160)
 /* script */
-var __vue_script__ = __webpack_require__(283)
+var __vue_script__ = __webpack_require__(322)
 /* template */
-var __vue_template__ = __webpack_require__(284)
+var __vue_template__ = __webpack_require__(323)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/App/Auth/Login.vue"
+Component.options.__file = "resources/js/App/Auth/Login.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-06a0efc2", Component.options)
+    hotAPI.createRecord("data-v-2daa830e", Component.options)
   } else {
-    hotAPI.reload("data-v-06a0efc2", Component.options)
+    hotAPI.reload("data-v-2daa830e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,12 +48,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 283:
+/***/ 322:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_auth_service__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(161);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -113,6 +114,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+
+
 
 
 
@@ -123,26 +129,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     data: function data() {
         return {
-            payload: {
-                email: '',
-                password: '',
-                remember: false
-            }
+            email: '',
+            password: '',
+            remember: false
         };
     },
 
-    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapActions"])(['login', 'setToken']), {
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(['getCurrent', 'getRoles']), {
         submit: function submit() {
             var _this = this;
 
-            this.login(this.payload).then(function (response) {
-                if (!response.token) {
-                    _this.setToken(response.token);
-                } else {
-                    _this.setToken(response.token);
-                    _this.$router.push({ name: 'home' });
-                    // this.$router.push({name: 'dashboard'})
-                }
+            __WEBPACK_IMPORTED_MODULE_0__services_auth_service__["c" /* makeLogin */]({
+                email: this.email,
+                password: this.password
+            }).then(function (response) {
+                console.log('authService.makeLogin', response);
+            }).then(function () {
+                _this.getCurrent().then(function () {
+                    _this.getRoles().then().catch(function (error) {
+                        console.log('getRoles error', error);
+                    });
+                }).catch(function (error) {
+                    console.log('getCurrent error', error);
+                });
+            }).catch(function (error) {
+                console.log('authService.makeLogin error', error);
             });
         }
     })
@@ -150,7 +161,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 284:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -189,8 +200,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.payload.email,
-                            expression: "payload.email"
+                            value: _vm.email,
+                            expression: "email"
                           }
                         ],
                         staticClass: "form-control form-control-user",
@@ -200,13 +211,13 @@ var render = function() {
                           "aria-describedby": "emailHelp",
                           placeholder: "Enter Email Address..."
                         },
-                        domProps: { value: _vm.payload.email },
+                        domProps: { value: _vm.email },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.payload, "email", $event.target.value)
+                            _vm.email = $event.target.value
                           }
                         }
                       })
@@ -218,8 +229,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.payload.password,
-                            expression: "payload.password"
+                            value: _vm.password,
+                            expression: "password"
                           }
                         ],
                         staticClass: "form-control form-control-user",
@@ -228,17 +239,13 @@ var render = function() {
                           id: "exampleInputPassword",
                           placeholder: "Password"
                         },
-                        domProps: { value: _vm.payload.password },
+                        domProps: { value: _vm.password },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(
-                              _vm.payload,
-                              "password",
-                              $event.target.value
-                            )
+                            _vm.password = $event.target.value
                           }
                         }
                       })
@@ -254,20 +261,20 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.payload.remember,
-                                expression: "payload.remember"
+                                value: _vm.remember,
+                                expression: "remember"
                               }
                             ],
                             staticClass: "custom-control-input",
                             attrs: { type: "checkbox", id: "customCheck" },
                             domProps: {
-                              checked: Array.isArray(_vm.payload.remember)
-                                ? _vm._i(_vm.payload.remember, null) > -1
-                                : _vm.payload.remember
+                              checked: Array.isArray(_vm.remember)
+                                ? _vm._i(_vm.remember, null) > -1
+                                : _vm.remember
                             },
                             on: {
                               change: function($event) {
-                                var $$a = _vm.payload.remember,
+                                var $$a = _vm.remember,
                                   $$el = $event.target,
                                   $$c = $$el.checked ? true : false
                                 if (Array.isArray($$a)) {
@@ -275,23 +282,15 @@ var render = function() {
                                     $$i = _vm._i($$a, $$v)
                                   if ($$el.checked) {
                                     $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.payload,
-                                        "remember",
-                                        $$a.concat([$$v])
-                                      )
+                                      (_vm.remember = $$a.concat([$$v]))
                                   } else {
                                     $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.payload,
-                                        "remember",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
+                                      (_vm.remember = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
                                   }
                                 } else {
-                                  _vm.$set(_vm.payload, "remember", $$c)
+                                  _vm.remember = $$c
                                 }
                               }
                             }
@@ -342,7 +341,11 @@ var render = function() {
                         staticClass: "small",
                         attrs: { to: { name: "forgot-password" } }
                       },
-                      [_vm._v("Forgot Password?")]
+                      [
+                        _vm._v(
+                          "Forgot Password?\n                                "
+                        )
+                      ]
                     )
                   ],
                   1
@@ -358,7 +361,11 @@ var render = function() {
                         staticClass: "small",
                         attrs: { to: { name: "register" } }
                       },
-                      [_vm._v("Create an Account!")]
+                      [
+                        _vm._v(
+                          "Create an Account!\n                                "
+                        )
+                      ]
                     )
                   ],
                   1
@@ -420,7 +427,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-06a0efc2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2daa830e", module.exports)
   }
 }
 
