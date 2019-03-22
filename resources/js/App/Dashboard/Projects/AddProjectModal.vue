@@ -11,9 +11,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <div class="form-group">
+                                <div class="form-group" :class="{'has-error' : errors.has('name')}">
                                     <label>Project name:</label>
-                                    <input v-model="project.name" type="text" class="form-control" placeholder="Project name">
+                                    <input v-model="project.name" v-validate="'required'" name="name" type="text" class="form-control" placeholder="Project name">
+                                    <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -27,7 +28,7 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="$emit('saveProject', project)">Create</button>
+                                <button type="button" class="btn btn-primary" @click="submit">Create</button>
                                 <button class="btn btn-default" @click="$emit('close')">Close</button>
                             </div>
                         </div>
@@ -50,6 +51,17 @@
                     name: '',
                     status: 'Active'
                 }
+            }
+        },
+        methods: {
+            submit() {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.$emit('saveProject', this.project);
+                        return;
+                    }
+                    // alert('Correct them errors!');
+                });
             }
         }
     }

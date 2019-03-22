@@ -44,8 +44,9 @@
         </div>
         <!-- /.panel-body -->
         <div class="panel-footer">
-            <div class="input-group">
-                <input v-model="newComment.body" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+            <span v-show="errors.has('message')" class="text-danger">{{ errors.first('message') }}</span>
+            <div class="input-group" :class="{'has-error' : errors.has('body')}">
+                <input v-model="newComment.body" v-validate="'required'" name="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                 <span class="input-group-btn">
                     <button class="btn btn-warning btn-sm" @click="submit" :class="{ 'disabled' : isHomePage }">
                         Send
@@ -77,8 +78,14 @@
         },
         methods: {
             submit() {
-                this.$emit('sendEvent', this.newComment);
-                this.newComment = {}
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.$emit('sendEvent', this.newComment);
+                        this.newComment = {};
+                        return;
+                    }
+                    // alert('Correct them errors!');
+                });
             },
             formatDateHuman(date) {
                 let minutes = moment().diff(date, 'minutes');

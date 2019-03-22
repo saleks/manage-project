@@ -27,14 +27,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="form-group">
+                                <div class="form-group" :class="{'has-error' : errors.has('name')}">
                                     <label>Task name:</label>
-                                    <input v-model="task.name" type="text" class="form-control" placeholder="Task name">
+                                    <input v-model="task.name" v-validate="'required'" name="name" type="text" class="form-control" placeholder="Task name">
+                                    <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" :class="{'has-error' : errors.has('description')}">
                                 <label>Description:</label>
-                                <textarea v-model="task.description" class="form-control" rows="3"></textarea>
+                                <textarea v-model="task.description" v-validate="'required'" name="description" class="form-control" rows="3"></textarea>
+                                <span v-show="errors.has('description')" class="text-danger">{{ errors.first('description') }}</span>
                             </div>
                             <div class="form-group">
                                 <label>Progress:</label>
@@ -53,7 +55,7 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="$emit('saveTask', task)">Create</button>
+                                <button type="button" class="btn btn-primary" @click="submit">Create</button>
                                 <button class="btn btn-default" @click="$emit('close')">Close</button>
                             </div>
                         </div>
@@ -73,8 +75,6 @@
         components: {
             Datepicker
         },
-        methods: {
-        },
         data() {
             return {
                 format: 'dd-MM-yyyy',
@@ -85,8 +85,19 @@
                     description: '',
                     start_date: new Date(),
                     end_date: new Date(),
-                    progress: null
+                    progress: 0
                 }
+            }
+        },
+        methods: {
+            submit() {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.$emit('saveTask', this.task);
+                        return;
+                    }
+                    // alert('Correct them errors!');
+                });
             }
         }
     }
