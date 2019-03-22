@@ -1,6 +1,6 @@
-export const AppLayout = r => require.ensure([], () => r(require('../../Layouts/AppLayout')), 'js/dashboard-bundle'); //AppLayout.vue
-export const Home = r => require.ensure([], () => r(require('./Index')), 'js/dashboard-index-bundle');//Index.vue
-export const Programme = r => require.ensure([], () => r(require('./Programme')), 'js/dashboard-programme-bundle');//Index.vue
+import AppLayout from '../../Layouts/AppLayout.vue'
+import Home from './Index.vue'
+import Programme from './Programme.vue'
 
 
 export default [
@@ -13,7 +13,7 @@ export default [
     path: '/dashboard',
     redirect: { name: 'home' },
     component: AppLayout,
-    meta: {requiresAuth: true},
+    meta: {requiresAuth: true, refresh: true},
     children: [
         {
             name: 'home',

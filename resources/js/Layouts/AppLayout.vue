@@ -8,7 +8,7 @@
     }
 </script>
 
-<style scoped>
-    @import "../../assets/sass/bootstrap.css";
-    @import "../../assets/sass/sb-admin-dasboard.min.css";
-</style>
+<style src="../../assets/sass/bootstrap.css"></style>
+<style src="../../assets/sass/sb-admin-dasboard.min.css"></style>
+
+

@@ -100,7 +100,6 @@
                 .then(() => {
                     let firstProg = _.first(this.programmesList);
                     this.selectedProgramme(firstProg.id);
-
                 });
         },
         methods: {

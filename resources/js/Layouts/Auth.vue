@@ -7,8 +7,9 @@
 </template>
 
 <script>
+    export default {
+        name: "Auth"
+    }
 </script>
-<style scoped>
-    @import "../../assets/sass/all.css";
-    @import "../../assets/sass/sb-admin-login.css";
-</style>
+<style src="../../assets/sass/all.css"></style>
+<style src="../../assets/sass/sb-admin-login.css"></style>

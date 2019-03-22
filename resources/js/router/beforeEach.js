@@ -4,7 +4,6 @@ import {http} from "../plugins/http";
 const needAuth = auth => auth === true;
 
 const beforeEach = (to, from, next) => {
-
     // store.commit('setLoading', true)
 
     const auth = to.meta.requiresAuth;

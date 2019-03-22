@@ -1,8 +1,7 @@
-export const AuthLayout = r => require.ensure([], () => r(require('../../Layouts/Auth')), 'js/layouts-bundle'); //AppLayout.vue
-export const Login = r => require.ensure([], () => r(require('./Login')), 'js/login-bundle');//Login.vue
-export const Register = r => require.ensure([], () => r(require('./Register')), 'js/register-bundle');//Register.vue
-export const ForgotPassword = r => require.ensure([], () => r(require('./ForgotPassword')), 'js/forgotPassword-bundle');//ForgotPassword.vue
-
+import AuthLayout from '../../Layouts/Auth.vue'
+import Login from './Login.vue'
+import Register from './Register.vue'
+import ForgotPassword from './ForgotPassword.vue'
 
 export default [
     {
@@ -16,7 +15,7 @@ export default [
                 path: '/login',
                 name: 'login',
                 component: Login,
-                meta: {requiresAuth: false},
+                meta: {requiresAuth: false, refresh: true},
             },
             {
                 path: '/register',
