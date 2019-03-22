@@ -21,7 +21,7 @@ export default [
                 path: '/register',
                 name: 'register',
                 component: Register,
-                meta: {requiresAuth: false},
+                meta: {requiresAuth: false, refresh: true},
             },
             {
                 path: '/forgot-password',
