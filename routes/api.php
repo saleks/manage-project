@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'API'], function () {
     Route::group(['prefix' => 'auth','middleware' => 'guest'], function () {
         Route::post('login', 'AuthController@login');
+        Route::post('register', 'RegisterController@register');
     });
     Route::group(['middleware' => 'jwt.refresh', 'prefix' => 'auth' ], function () {
         Route::post('refresh', 'AuthController@refresh');
