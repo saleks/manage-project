@@ -63,8 +63,7 @@
     import TaskList from './Tasks/TaskList';
     import CommentsList from './Comments/CommentsList';
 
-
-    import { mapActions } from 'vuex';
+    import * as dashboardService from '../../services/dashboard.service'
 
     export default {
         name: "index",
@@ -75,7 +74,6 @@
             AddProgrammeModal,
             TaskList,
             CommentsList
-
         },
         computed: {
             programmesList() {
@@ -96,16 +94,14 @@
             }
         },
         mounted() {
-            this.getDashboardData()
+            dashboardService.loadData()
                 .then(() => {
+                    // console.log('dashboardService response', response);
                     let firstProg = _.first(this.programmesList);
                     this.selectedProgramme(firstProg.id);
                 });
         },
         methods: {
-            ...mapActions([
-                'saveNewProgramme', 'getDashboardData'
-            ]),
             selectedProgramme(id) {
                 this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
                 this.selectDefaultProject();
@@ -149,8 +145,10 @@
                     type: 'programme',
                     entity: programme
                 };
-                this.saveNewProgramme(data);
-                this.showModalProgramme = false;
+                dashboardService.saveProgramme(data)
+                    .then(() => {
+                        this.showModalProgramme = false;
+                    })
             },
             getWidget(name){
                 this.widgets[name].count = this.count(this[name+'List']);

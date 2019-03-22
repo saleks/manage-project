@@ -85,7 +85,7 @@ function _resetAuthData() {
 }
 
 function _setAuthData(response) {
-    console.log('_setAuthData response', response);
+    // console.log('_setAuthData response', response);
     const nowTime = Math.floor(new Date().getTime() / 1000);
     $store.commit('SET_TOKEN', response.data.token);
     $store.commit('SET_EXPIRES', nowTime + parseInt(response.data.expires_in));

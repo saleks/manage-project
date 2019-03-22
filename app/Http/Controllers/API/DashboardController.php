@@ -75,7 +75,7 @@ class DashboardController extends Controller
         }
 
         $response = [
-            'data' => $entity,
+            'entity' => $entity,
             'status' => 'success'
         ];
 

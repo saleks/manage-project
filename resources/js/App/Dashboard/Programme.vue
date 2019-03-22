@@ -53,8 +53,8 @@
     import AddProjectModal from './Projects/AddProjectModal';
     import AddTaskModal from './Tasks/AddTaskModal';
     import CommentsList from './Comments/CommentsList';
-    import { mapActions } from 'vuex';
 
+    import * as programmeService from '../../services/programme.service';
 
     export default {
         components: {
@@ -103,9 +103,6 @@
            this.selectedProgramme(id);
         },
         methods: {
-            ...mapActions([
-                'saveNewProject', 'saveNewTask', 'saveNewComment'
-            ]),
             selectedProgramme(id) {
                 this.currentProg = _.find(this.programmesList, ['id', parseInt(id)]);
                 this.selectDefaultProject();
@@ -146,11 +143,11 @@
                     entity: project,
                     programme_id: this.currentProg.id
                 };
-                this.saveNewProject(data)
+                programmeService.saveProject(data)
                     .then(response => {
-                        console.log('resp in component', response)
+                        // console.log('resp in component', response);
+                        this.showModalProject = false;
                     });
-                this.showModalProject = false;
             },
             showedModalTask() {
                 if (_.isEmpty(this.currentProject)) {
@@ -159,12 +156,15 @@
                 this.showModalTask = true;
             },
             addTask(task) {
+                task.progress = Math.floor(task.progress);
+                task.start_date = moment(task.start_date).format('YYYY-MM-DD');
+                task.end_date = moment(task.end_date).format('YYYY-MM-DD');
                 let data = {
                     type: 'task',
                     entity: task,
                     project_id: this.currentProject.id
                 };
-                this.saveNewTask(data)
+                programmeService.saveTask(data)
                     .then(() => {
                         // console.log('addTask then');
                         this.showModalTask = false;
@@ -179,7 +179,7 @@
                     entity: comment,
                     task_id: this.currentTask.id
                 };
-                this.saveNewComment(data)
+                programmeService.saveComment(data)
                     .then((resp) => {
                         console.log('saveNewComment in component', resp);
                     });
