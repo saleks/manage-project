@@ -11,13 +11,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <div class="form-group">
+                                <div class="form-group" :class="{'has-error' : errors.has('name')}">
                                     <label>Programme name:</label>
-                                    <input v-model="programme.name" type="text" class="form-control" placeholder="Programme name">
+                                    <input v-model="programme.name" v-validate="'required'" name="name" type="text" class="form-control" placeholder="Programme name">
+                                    <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="$emit('saveProgramme', programme)">Create</button>
+                                <button type="button" class="btn btn-primary" @click="submit">Create</button>
                                 <button class="btn btn-default" @click="$emit('close')">Close</button>
                             </div>
                         </div>
@@ -39,6 +40,17 @@
                 }
             }
         },
+        methods: {
+            submit() {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.$emit('saveProgramme', this.programme);
+                        return;
+                    }
+                    // alert('Correct them errors!');
+                });
+            }
+        }
     }
 </script>
 

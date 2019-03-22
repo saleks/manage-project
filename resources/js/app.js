@@ -3,13 +3,13 @@ window._ = require('lodash');
 
 window.Vue = require('vue');
 
-// window.Vuex = require('vuex');
-
 import router from './router';
 import store from './store';
-
 import httpPlugin from './plugins/http'
 
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
 /**
  * Make $http avaible to all components
  * Send store and router to httpPlugin (injection)
