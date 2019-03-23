@@ -15,12 +15,18 @@
                                 <form class="user" @submit.prevent="submit" method="post">
                                     <div class="form-group">
                                         <input v-model="email" type="email" class="form-control form-control-user"
+                                               v-validate="'required|email'" name="email"
+                                               :class="{'is-invalid' : errors.has('email')}"
                                                id="exampleInputEmail" aria-describedby="emailHelp"
                                                placeholder="Enter Email Address...">
+                                        <span v-show="errors.has('email')" class="text-danger small">{{ errors.first('email') }}</span>
                                     </div>
                                     <div class="form-group">
                                         <input v-model="password" type="password" class="form-control form-control-user"
+                                               v-validate="'required'" name="password"
+                                               :class="{'is-invalid' : errors.has('password')}"
                                                id="exampleInputPassword" placeholder="Password">
+                                        <span v-show="errors.has('password')" class="text-danger small">{{ errors.first('password') }}</span>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
@@ -80,24 +86,31 @@
                 'getCurrent', 'getRoles'
             ]),
             submit() {
-                authService.makeLogin({
-                    email: this.email,
-                    password: this.password
-                }).then(response => {
-                    console.log('authService.makeLogin', response)
-                }).then(() => {
-                    this.getCurrent().then(() => {
-                        this.getRoles().then().catch((error) => {
-                            console.log('getRoles error', error)
-                        });
-                    })
-                        .catch((error) => {
-                            console.log('getCurrent error', error)
-                        });
-                })
-                    .catch((error) => {
-                        console.log('authService.makeLogin error', error)
-                    });
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        authService.makeLogin({
+                            email: this.email,
+                            password: this.password
+                        }).then(response => {
+                            console.log('authService.makeLogin', response)
+                        }).then(() => {
+                            this.getCurrent().then(() => {
+                                this.getRoles().then().catch((error) => {
+                                    console.log('getRoles error', error)
+                                });
+                            })
+                                .catch((error) => {
+                                    console.log('getCurrent error', error)
+                                });
+                        })
+                            .catch((error) => {
+                                console.log('authService.makeLogin error', error)
+                            });
+                        return;
+                    }
+                    // alert('Correct them errors!');
+                });
+
             }
         }
     }

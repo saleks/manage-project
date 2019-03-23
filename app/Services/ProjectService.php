@@ -29,6 +29,9 @@ class ProjectService
 
         $project = new Project();
         $project->name = $request['entity']['name'];
+        $project->reason = $request['entity']['reason'];
+        $project->dispatch = $request['entity']['dispatch'];
+        $project->comment = $request['entity']['comment'];
         $project->status_id = $status->id;
 
         return $programme->projects()->save($project);

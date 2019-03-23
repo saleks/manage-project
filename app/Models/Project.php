@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = [
-        'name', 'programme_id', 'status_id'
+        'name', 'programme_id', 'status_id', 'reason', 'dispatch', 'comment'
     ];
 
     /**

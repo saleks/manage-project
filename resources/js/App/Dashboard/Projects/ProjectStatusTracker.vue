@@ -4,7 +4,7 @@
             <i class="fa fa-percent fa-fw"></i> &#160;Project Status Tracker
             <div class="pull-right">
                 <div class="btn-group" :class="{'open' : isOpen}">
-                    <button v-if="!isHomePage" class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>
+                    <!--<button v-if="!isHomePage" class="btn btn-primary btn-xs" @click="$emit('showedModalProject')">Add New Project</button>-->
                     <template v-if="isHomePage">
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" @click="isOpen = !isOpen">
                             {{ currentProg.name }}

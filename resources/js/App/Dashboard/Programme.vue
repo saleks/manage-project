@@ -8,7 +8,9 @@
                     <h1>Programme: "{{ currentProg.name }}"</h1>
                 </div>
                 <div class="col-lg-6" style="margin:20px 0 0 0">
-                    <!--<button type="button" class="btn btn-info pull-right btn-lg" @click="showModalProgramme = true">Start New Programme</button>-->
+                    <button type="button" class="btn btn-info pull-right btn-lg"
+                            @click="showedModalProject">Start New {{ currentProg.name }} Project
+                    </button>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -41,7 +43,10 @@
                 <!-- /.col-lg-4 -->
             </div>
         </div>
-        <add-project-modal v-if="showModalProject" @close="showModalProject = false" @saveProject="addProject"></add-project-modal>
+        <add-project-modal v-if="showModalProject"
+                           :programmeName="currentProg.name"
+                           @close="showModalProject = false"
+                           @saveProject="addProject"></add-project-modal>
         <add-task-modal v-if="showModalTask" @close="showModalTask = false" @saveTask="addTask"></add-task-modal>
     </div>
 </template>
@@ -67,7 +72,7 @@
         },
         name: "Programme",
         watch: {
-            '$route' (to, from) {
+            '$route'(to, from) {
                 // обрабатываем изменение параметров маршрута...
                 this.selectedProgramme(to.params.id);
             }
@@ -94,13 +99,13 @@
                 return _.isEmpty(tasks) ? [] : tasks;
             },
             selectedTaskComments() {
-                let comments =  _.filter(this.commentsList, ['task_id', this.currentTask.id]);
+                let comments = _.filter(this.commentsList, ['task_id', this.currentTask.id]);
                 return _.isEmpty(comments) ? [] : comments;
             }
         },
         mounted() {
-           let id = this.$route.params['id'];
-           this.selectedProgramme(id);
+            let id = this.$route.params['id'];
+            this.selectedProgramme(id);
         },
         methods: {
             selectedProgramme(id) {
@@ -110,7 +115,7 @@
             },
             selectDefaultProject() {
                 let firstProject = _.first(this.selectProgrammProj);
-                if (! _.isEmpty(firstProject)) {
+                if (!_.isEmpty(firstProject)) {
                     this.selectedProject(firstProject.id);
                 } else {
                     this.currentProject = {}
@@ -118,7 +123,7 @@
             },
             selectDefaultTask() {
                 let firstTask = _.first(this.selectProjectTasks);
-                if (! _.isEmpty(firstTask)) {
+                if (!_.isEmpty(firstTask)) {
                     this.selectedTask(firstTask.id);
                 } else {
                     this.currentTask = {}

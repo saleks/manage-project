@@ -7,15 +7,33 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" @click="$emit('close')">&times;</button>
-                            <h4 class="modal-title">New Project</h4>
+                            <h4 class="modal-title">New {{ programmeName }} Project</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
+                                <label>Project No:</label>
+                                <input type="text" class="form-control" placeholder="Look up - autoincrease" disabled>
+                            </div>
+                            <div class="form-group">
                                 <div class="form-group" :class="{'has-error' : errors.has('name')}">
-                                    <label>Project name:</label>
+                                    <label>Requested By:</label>
                                     <input v-model="project.name" v-validate="'required'" name="name" type="text" class="form-control" placeholder="Project name">
                                     <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reason:</label>
+                                <select v-model="project.reason" class="form-control">
+                                    <option value="Cost Savings">Cost Savings</option>
+                                    <option value="Contingency">Contingency</option>
+                                    <option value="Quality">Quality</option>
+                                    <option value="Health and Safety">Health and Safety</option>
+                                </select>
+                            </div>
+                            <div class="form-group" :class="{'has-error' : errors.has('dispatch')}">
+                                <label>Dispatch To:</label>
+                                <input v-model="project.dispatch" v-validate="'required'" name="dispatch" type="text" class="form-control" placeholder="Look up name from AD">
+                                <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
                             </div>
                             <div class="form-group">
                                 <label>Status:</label>
@@ -27,9 +45,13 @@
                                     <option value="Drafts">Drafts</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Comment:</label>
+                                <textarea v-model="project.comment" class="form-control" rows="3"></textarea>
+                            </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" @click="submit">Create</button>
-                                <button class="btn btn-default" @click="$emit('close')">Close</button>
+                                <button type="button" class="btn btn-default" @click="submit">Next</button>
+                                <!--<button class="btn btn-default" @click="$emit('close')">Close</button>-->
                             </div>
                         </div>
 
@@ -43,13 +65,19 @@
 <script>
     export default {
         name: "add-project-modal",
+        props: {
+            programmeName: String
+        },
         data() {
             return {
                 project: {
                     id: null,
                     programme_id: null,
                     name: '',
-                    status: 'Active'
+                    status: 'Active',
+                    reason: 'Cost Savings',
+                    dispatch: '',
+                    comment: ''
                 }
             }
         },
