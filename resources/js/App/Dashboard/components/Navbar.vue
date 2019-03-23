@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <router-link class="navbar-brand" :to="{ name: 'home' }">QAdmin</router-link>
+            <router-link class="navbar-brand" :to="{ name: 'home' }">{{ appName }}</router-link>
         </div>
         <!-- /.navbar-header -->
 
@@ -238,6 +238,11 @@
         },
         props: {
             programmes: Array
+        },
+        computed: {
+            appName() {
+                return this.$store.state.appName;
+            },
         },
         methods: {
             ...mapActions([

@@ -44,6 +44,14 @@
         props: {
             programmes: Array
         },
+        watch: {
+            '$route'(to, from) {
+                this.sel = to.params.id;
+            }
+        },
+        mounted() {
+            this.sel = parseInt(this.$route.params['id']);
+        },
         methods: {
             toggleMenu(id) {
                 this.sel = id;
