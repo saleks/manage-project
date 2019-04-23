@@ -6,5 +6,5 @@ import * as actions from './actions'
 import * as getters from './getters'
 
 const module = { state, mutations, actions, getters };
-
+console.log(' auth vuex index module', module);
 export default { module, plugin }

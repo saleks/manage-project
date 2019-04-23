@@ -197,9 +197,6 @@
                 currentTask: {},
                 currentProg: {},
                 currentProject: {},
-                // selectedTaskComments: [],
-                // selectProjectTasks: [],
-                // selectProgrammProj: []
             }
         }
     }

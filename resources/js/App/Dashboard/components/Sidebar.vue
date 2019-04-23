@@ -24,7 +24,7 @@
                                 <router-link :class="{'active': sel === programme.id }" :to="{ name: 'programme', params: { id: programme.id }}">{{ programme.name }}</router-link>
                             </li>
                             <li>
-                                <a :class="{'active': sel === programme.id }" href="productpp.html">{{ programme.name }} By Assigned To</a>
+                                <a :class="{'active': sel === programme.id }" >{{ programme.name }} By Assigned To</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

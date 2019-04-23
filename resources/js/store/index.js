@@ -10,7 +10,7 @@ import state from './state'
 import {vuex as app} from '../App'
 
 Vue.use(Vuex);
-
+console.log('store index ...app', app);
 const store = new Vuex.Store({
     state,
     actions,

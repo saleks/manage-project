@@ -46,9 +46,9 @@
         <div class="panel-footer">
             <span v-show="errors.has('message')" class="text-danger">{{ errors.first('message') }}</span>
             <div class="input-group" :class="{'has-error' : errors.has('body')}">
-                <input v-model="newComment.body" v-validate="'required'" name="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                <input v-model="newComment.body" v-validate="'required|min:2'" name="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                 <span class="input-group-btn">
-                    <button class="btn btn-warning btn-sm" @click="submit" :class="{ 'disabled' : isHomePage }">
+                    <button class="btn btn-warning btn-sm" @click="submit" :class="{ 'disabled' : isHomePage }" :disabled="isHomePage">
                         Send
                     </button>
                 </span>
@@ -80,8 +80,12 @@
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        this.$emit('sendEvent', this.newComment);
-                        this.newComment = {};
+                        let com = {};
+                        Object.assign(com, this.newComment);
+                        this.$emit('sendEvent', com);
+                        this.clear().then(() => {
+                            this.$validator.reset();
+                        });
                         return;
                     }
                     // alert('Correct them errors!');
@@ -90,6 +94,9 @@
             formatDateHuman(date) {
                 let minutes = moment().diff(date, 'minutes');
                 return moment.duration(minutes, 'minutes').humanize();
+            },
+            async clear() {
+                this.newComment = {};
             }
         }
     }
